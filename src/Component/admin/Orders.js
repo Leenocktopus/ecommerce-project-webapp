@@ -1,14 +1,14 @@
 import React,{Component} from "react";
 
 
-class MainContent extends Component{
+class Orders extends Component{
     render() {
         return (
             <div>
-                MainContent
+                Orders
             </div>
         );
     }
 }
 
-export default MainContent
+export default Orders

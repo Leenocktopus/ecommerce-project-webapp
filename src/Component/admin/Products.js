@@ -1,14 +1,14 @@
 import React,{Component} from "react";
 
 
-class MainContent extends Component{
+class Products extends Component{
     render() {
         return (
             <div>
-                MainContent
+                Products
             </div>
         );
     }
 }
 
-export default MainContent
+export default Products

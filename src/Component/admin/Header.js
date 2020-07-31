@@ -1,14 +1,13 @@
 import React,{Component} from "react";
 
 
-class MainContent extends Component{
+class Header extends Component{
     render() {
         return (
             <div>
-                MainContent
+                {/*Header*/}
             </div>
         );
     }
 }
-
-export default MainContent
+export default Header

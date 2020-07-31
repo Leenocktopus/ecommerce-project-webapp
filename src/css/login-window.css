@@ -1,0 +1,29 @@
+
+
+.login-field{
+    border: solid 1px #cccccc;
+    border-radius: 5px;
+    width: 35%;
+    margin: auto;
+    margin-top: 14%;
+    height: 30%;
+    text-align: center;
+    background-color: cornflowerblue;
+    padding: 30px;
+}
+
+.login-field input[type=text]{
+    margin-top: 15px;
+    font-size: 12pt;
+    border-radius: 7px;
+    padding: 3px 5px;
+    width: 250px;
+}
+
+.login-field button{
+    margin: 15px 0;
+    font-size: 12pt;
+    padding: 3px 12px;
+    border: 1px solid black;
+    border-radius: 5px;
+}

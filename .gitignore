@@ -1,7 +1,5 @@
 .idea
 node_modules
-
-.pnp.js
-
-react-end.iml
+*.pnp.js
+*.iml
 

@@ -1,14 +1,14 @@
 import React,{Component} from "react";
 
 
-class MainContent extends Component{
+class Settings extends Component{
     render() {
         return (
             <div>
-                MainContent
+                Settings
             </div>
         );
     }
 }
 
-export default MainContent
+export default Settings
