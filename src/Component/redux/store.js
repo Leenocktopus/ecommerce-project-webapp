@@ -1,19 +1,17 @@
-import {applyMiddleware, createStore} from 'redux';
+import {applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
-import {getState, saveState} from "./reducers/storage";
+import persistState from 'redux-localstorage'
 
 
-const persistedState = getState();
-const middleware = [thunk];
+const combineEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+    trace: true,
+    traceLimit: 25
+}) || compose;
+
 
 const store = createStore(
     rootReducer,
-    persistedState,
-    applyMiddleware(...middleware)
-);
-store.subscribe(() => {
-        saveState(store.getState());
-    }
+    combineEnhancers(applyMiddleware(thunk), persistState(['cartState', 'userState']))
 );
 export default store;

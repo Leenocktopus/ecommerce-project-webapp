@@ -1,14 +1,12 @@
 import React,{Component} from "react";
 
-
-class Settings extends Component{
+class AboutAndContacts extends Component{
     render() {
         return (
             <div>
-                Settings
+
             </div>
         );
     }
 }
-
-export default Settings
+export default AboutAndContacts

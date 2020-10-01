@@ -1,4 +1,4 @@
-import {ADD_TO_CART, DELETE_ALL, GET_CART_ITEMS, REMOVE_FROM_CART, SET_ITEMS_VALUE} from "./types";
+import {ADD_TO_CART, DELETE_ALL, GET_CART_ITEMS, REMOVE_FROM_CART, SET_ITEMS_VALUE} from "../types";
 
 export const addToCart = (val) => {
     return (dispatch) => {

@@ -47,3 +47,20 @@
     color: whitesmoke;
 }
 
+.sneaky-button{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    display: block;
+    width: 100%;
+}
+
+.sneaky-button:after:after{
+    background-color: cornflowerblue;
+    border: none;
+}
