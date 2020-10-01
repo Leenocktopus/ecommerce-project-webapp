@@ -1,52 +1,63 @@
-import React,{Component} from "react";
+import React, {useState} from "react";
 import "../../../css/login-window.css"
 import {axiosSecurity} from "../../util/axiosConfig";
 import {setAccessToken} from "../../redux/actions/tokenActions";
 import {connect} from "react-redux";
 import jwtDecode from "jwt-decode";
-import {Link} from 'react-router-dom'
 import {setUser} from "../../redux/actions/userActions";
 
-class Login extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: "",
-            password: ""
-        }
-    }
 
-    onChange = (event)=>{
-        const {name,value} = event.target
-        this.setState({[name]:value})
-    }
+const Login = ({setUser, setAccessToken, history, ...otherProps}) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [failed, setFailed] = useState(false);
 
-    onClick = async () =>{
-        let token = await axiosSecurity.post("/login", this.state,)
+    const login = () => {
+        axiosSecurity.post("/login", {username, password},)
             .then(response => response.data.token)
-        this.props.setAccessToken(token)
-        const {sub} = jwtDecode(token)
-        console.log(token)
-        await axiosSecurity.get(`/users/${sub}`, {headers: {
+            .then(token => {
+                setAccessToken(token)
+                return token
+            }).then(token => axiosSecurity.get(`/users/${jwtDecode(token)["sub"]}`, {
+            headers: {
                 authorization: `Bearer ${token}`
-            }})
-        .then(response => this.props.setUser(response.data))
+            }
+        })
+            .then(response => setUser(response.data)))
+            .then(() => history.push("/admin/main"))
+            .catch(() => setFailed(true));
 
     }
-
-
-
-    render() {
-        return (
-            <div className={"login-field"}>
-                <input type={"text"} name={"username"} value={this.state.username} onChange={this.onChange}/>
-                <br/>
-                <input type={"text"} name={"password"} value={this.state.password} onChange={this.onChange}/>
-                <br/>
-                <Link to={"/admin/main"}><button onClick={this.onClick}>Login</button></Link>
+    return (
+        <div id={"login-wrapper"}>
+            <div id={"login-form"}>
+                <div id="login-header">
+                    Sign in
+                </div>
+                <div id={"login-body"}>
+                    {failed ? <div className={"text-danger"}>Password or login was not correct</div> :
+                        <div>&nbsp;</div>}
+                    <input type={"text"}
+                           name={"username"}
+                           value={username}
+                           onChange={e => setUsername(e.target.value)}
+                           placeholder={"Username"}
+                           className={"login-element"}/>
+                    <br/>
+                    <input type={"password"}
+                           name={"password"}
+                           value={password}
+                           onChange={e => setPassword(e.target.value)}
+                           placeholder={"Password"}
+                           className={"login-element"}/>
+                    <br/>
+                    <button onClick={login} className={"login-element"}>Login</button>
+                </div>
             </div>
-        );
-    }
+        </div>
+
+    );
+
 }
 
 export default connect(null, {setAccessToken, setUser})(Login)

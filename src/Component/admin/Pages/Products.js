@@ -1,8 +1,8 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 import {axiosAPI} from "../../util/axiosConfig";
 
 
-class Products extends Component{
+class Products extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,9 +11,9 @@ class Products extends Component{
     }
 
 
-    onChange = (event) =>{
+    onChange = (event) => {
         const {name, value} = event.target;
-        this.setState({[name]:value})
+        this.setState({[name]: value})
     }
 
 
@@ -21,10 +21,11 @@ class Products extends Component{
         axiosAPI.get('/products').then(res => this.setState({products: res.data}))
     }
 
-    next(){
+    next() {
 
     }
-    prev(){
+
+    prev() {
 
     }
 
@@ -33,15 +34,15 @@ class Products extends Component{
             <div>
                 <br/>
                 {Object.keys(this.state.products).length ?
-                    this.state.products._embedded.productModelList.map(item =>(
+                    this.state.products._embedded.productModelList.map(item => (
                         <div key={item.id}>
                             <div>{item.name}</div>
                             <div>{item.price}</div>
                             <br/>
-                            </div>
-                                ))
+                        </div>
+                    ))
 
-                    :<div>Loading...</div>}
+                    : <div>Loading...</div>}
             </div>
         );
     }

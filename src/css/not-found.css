@@ -1,7 +1,8 @@
-.error-page{
+.error-page {
     text-align: center;
 }
-.error-page hr{
+
+.error-page hr {
     border: none;
     height: 1px;
     background-color: #333;

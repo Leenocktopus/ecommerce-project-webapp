@@ -1,7 +1,7 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 
 
-class Orders extends Component{
+class Orders extends Component {
     render() {
         return (
             <div>

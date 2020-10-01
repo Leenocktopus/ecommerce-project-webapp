@@ -1,6 +1,6 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 
-class ShopPage extends Component{
+class ShopPage extends Component {
     render() {
         return (
             <div>
@@ -9,4 +9,5 @@ class ShopPage extends Component{
         );
     }
 }
+
 export default ShopPage

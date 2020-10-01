@@ -1,7 +1,7 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 
 
-class MainContent extends Component{
+class MainContent extends Component {
     render() {
         return (
             <div>

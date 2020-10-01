@@ -1,6 +1,6 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 
-class MainPage extends Component{
+class MainPage extends Component {
     render() {
         return (
             <div>
@@ -9,4 +9,5 @@ class MainPage extends Component{
         );
     }
 }
+
 export default MainPage

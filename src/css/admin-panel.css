@@ -1,18 +1,19 @@
 /*Banner*/
-.banner{
+.banner {
     text-align: center;
     margin-right: 20px;
     color: whitesmoke;
     padding: 20px;
 }
+
 /*Fixed sidebar and grid*/
-.admin-main-grid{
+.admin-main-grid {
     display: grid;
     grid-template-columns: 24vw auto;
     grid-column-gap: 10px;
 }
 
-.admin-main-content{
+.admin-main-content {
     grid-column-start: 2;
 }
 
@@ -25,29 +26,29 @@
 }
 
 /*Menu style*/
-.admin-menu ul{
+.admin-menu ul {
     list-style: none;
     font-size: 14pt;
     font-weight: bold;
 }
 
 /*Links style*/
-.admin-active-menu-link{
+.admin-active-menu-link {
     background-color: whitesmoke;
     color: black !important;
 }
 
-.admin-menu a{
+.admin-menu a {
     display: block;
     padding: 4px;
     text-decoration: none;
 }
 
-.admin-menu a, a:visited{
+.admin-menu a, a:visited {
     color: whitesmoke;
 }
 
-.sneaky-button{
+.sneaky-button {
     background: none;
     color: inherit;
     border: none;
@@ -60,7 +61,7 @@
     width: 100%;
 }
 
-.sneaky-button:after:after{
+.sneaky-button:after:after {
     background-color: cornflowerblue;
     border: none;
 }

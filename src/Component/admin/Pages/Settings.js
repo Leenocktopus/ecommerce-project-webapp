@@ -1,44 +1,35 @@
-import React,{Component} from "react";
+import React, {useState} from "react";
 import {setUser} from "../../redux/actions/userActions";
 import {connect} from "react-redux";
 
+const Setting = ({user, ...otherProps}) => {
 
-class Settings extends Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: props.user.firstName,
-            lastName: props.user.lastName,
-            username: props.user.username,
-            email: props.user.email,
-            password: "",
-            newPassword: "",
-            repeatPassword: ""
-        }
-    }
+    const [firstName, setFirstName] = useState(user.firstName);
+    const [lastName, setLastName] = useState(user.lastName);
+    const [username, setUsername] = useState(user.username);
+    const [email, setEmail] = useState(user.email);
+    const [password, setPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [repeatPassword, setRepeatPassword] = useState("");
 
-    onChange = (event) =>{
-        const {name, value} = event.target;
-        this.setState({[name]:value})
-    }
-
-    render() {
-        return (
-            <div>
-                <input name={"firstName"} type={"text"} onChange={this.onChange} value={this.state.firstName}/>
-                <input name={"lastName"} type={"text"} onChange={this.onChange} value={this.state.lastName}/>
-                <input name={"username"} type={"text"} onChange={this.onChange} value={this.state.username}/>
-                <input name={"email"} type={"text"} onChange={this.onChange} value={this.state.email}/>
-                <input name={"password"} type={"text"} onChange={this.onChange} value={this.state.password}/>
-                <input name={"newPassword"} type={"text"} onChange={this.onChange} value={this.state.newPassword}/>
-                <input name={"repeatPassword"} type={"text"} onChange={this.onChange} value={this.state.repeatPassword}/>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <input name={"firstName"} type={"text"} onChange={e => setFirstName(e.target.value)} value={firstName}/>
+            <input name={"lastName"} type={"text"} onChange={e => setLastName(e.target.value)} value={lastName}/>
+            <input name={"username"} type={"text"} onChange={e => setUsername(e.target.value)} value={username}/>
+            <input name={"email"} type={"text"} onChange={e => setEmail(e.target.value)} value={email}/>
+            <input name={"password"} type={"text"} onChange={e => setPassword(e.target.value)} value={password}/>
+            <input name={"newPassword"} type={"text"} onChange={e => setNewPassword(e.target.value)}
+                   value={newPassword}/>
+            <input name={"repeatPassword"} type={"text"} onChange={e => setRepeatPassword(e.target.value)}
+                   value={repeatPassword}/>
+        </div>
+    );
 }
-const mapStateToProps = state =>{
+
+const mapStateToProps = state => {
     return {
         user: state.userState
     };
 }
-export default connect(mapStateToProps, {setUser})(Settings)
+export default connect(mapStateToProps, {setUser})(Setting)
