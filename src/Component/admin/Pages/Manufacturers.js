@@ -1,49 +1,34 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import {axiosAPI} from "../../util/axiosConfig";
 
+const Manufacturers = () => {
+    const[manufacturers, setManufacturers] = useState(null);
+    const[newManufacturer, setNewManufacturer] = useState("");
 
-class Manufacturers extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            manufacturers: {},
-            newManufacturer: ""
-        }
+    useEffect(() => {
+        axiosAPI.get('/manufacturers').then(res => setManufacturers(res.data))
+    })
 
-    }
-
-    onChange = (event) => {
-        const {name, value} = event.target;
-        this.setState({[name]: value})
-    }
-
-    onClick = async () => {
+    const onClick = async () => {
         await axiosAPI.post('/manufacturers', {
-                name: this.state.newManufacturer
+                name: newManufacturer
             }
         )
-        axiosAPI.get('/manufacturers').then(res => this.setState({manufacturers: res.data}))
+        axiosAPI.get('/manufacturers').then(res => setManufacturers(res.data))
     }
 
-    componentDidMount() {
-        axiosAPI.get('/manufacturers').then(res => this.setState({manufacturers: res.data}))
-    }
-
-    render() {
-        return (
-            <div>
-                <br/>
-                <input type={"text"} name={"newManufacturer"} value={this.state.newManufacturer}
-                       onChange={this.onChange}/>
-                <button onClick={this.onClick}>Add</button>
-                {Object.keys(this.state.manufacturers).length ?
-                    this.state.manufacturers._embedded.manufacturerModelList.map(item => (
-                        <div key={item.id}>{item.name}</div>
-                    ))
-                    : <div>Loading...</div>}
-            </div>
-        );
-    }
+    return (
+        <div>
+            <br/>
+            <input type={"text"} name={"newManufacturer"} value={newManufacturer}
+                   onChange={e => setNewManufacturer(e.target.value)}/>
+            <button onClick={onClick}>Add</button>
+            {manufacturers ? manufacturers._embedded.manufacturerModelList.map(item => (
+                    <div key={item.id}>{item.name}</div>
+                ))
+                : <div>Loading...</div>}
+        </div>
+    );
 }
 
 export default Manufacturers

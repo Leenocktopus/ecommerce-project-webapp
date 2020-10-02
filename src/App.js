@@ -15,17 +15,14 @@ import NotFound from "./Component/admin/Pages/NotFound";
 import MainPage from "./Component/user/MainPage";
 
 const App = ({setAccessToken, ...otherProps}) => {
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
             axiosSecurity.get("/refresh")
                 .then(response => response.data.token)
-                .then(
-                    token => {
-                        setAccessToken(token)
-                        setLoading(false)
-                    }
-                ).catch(() => setLoading(false))
+                .then(token => setAccessToken(token))
+                .then(() => setLoading(false))
+                .catch(() => setLoading(false))
         }
         , [setAccessToken])
 

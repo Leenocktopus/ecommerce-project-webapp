@@ -10,7 +10,6 @@
 .admin-main-grid {
     display: grid;
     grid-template-columns: 24vw auto;
-    grid-column-gap: 10px;
 }
 
 .admin-main-content {
