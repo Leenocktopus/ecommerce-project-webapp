@@ -7,7 +7,7 @@ const Manufacturers = () => {
 
     useEffect(() => {
         axiosAPI.get('/manufacturers').then(res => setManufacturers(res.data))
-    })
+    },[])
 
     const onClick = async () => {
         await axiosAPI.post('/manufacturers', {

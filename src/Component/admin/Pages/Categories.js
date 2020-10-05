@@ -8,7 +8,7 @@ const Categories = () =>{
     useEffect(() => {
 
         axiosAPI.get('/categories').then(res => setCategories(res.data))
-    })
+    }, [])
 
     const onClick = async () => {
         await axiosAPI.post('/categories', {

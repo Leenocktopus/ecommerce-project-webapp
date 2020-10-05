@@ -9,7 +9,7 @@
 /*Fixed sidebar and grid*/
 .admin-main-grid {
     display: grid;
-    grid-template-columns: 24vw auto;
+    grid-template-columns: 20vw auto;
 }
 
 .admin-main-content {

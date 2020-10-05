@@ -81,8 +81,6 @@ const ProductModal = (props) => {
                         </tr>
                         </tbody>
                     </table>
-
-                <div className={"control-modal-images"}>Images</div>
                 <div className={"control-modal-description"}>
                     <div>Description:</div>
                     <textarea value={description} onChange={e => setDescription(e.target.value)}/>

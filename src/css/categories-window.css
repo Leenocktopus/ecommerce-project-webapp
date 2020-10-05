@@ -62,7 +62,11 @@
 #new-button{
     justify-self: left;
 }
-
+.admin-control-image{
+    height: 40px;
+    width: 40px;
+    object-fit: scale-down;
+}
 
 .control-modal h2{
     width: 100%;
@@ -87,16 +91,6 @@
     margin: 0;
 }
 
-.control-modal-table{
-    grid-row: 1/6;
-}
-
-.control-modal-images{
-    grid-row: 1/5;
-}
-.control-modal-description{
-    grid-row: 5/6;
-}
 .control-modal-table input, .control-modal-table select{
     width: 100%;
     margin-top: 10px;
@@ -124,4 +118,61 @@
 }
 .admin-prev-button:disabled, .admin-next-button:disabled{
     background-color: rgba(100, 149, 237, 0.65);
+}
+
+
+.image-modal{
+    display: grid;
+    margin: 10px 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+.images-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-bottom: 30px;
+    grid-column: 1/3;
+
+}
+.image-modal-main-image{
+    height: 350px;
+    width: 350px;
+    object-fit: scale-down;
+    justify-self: center;
+    grid-column: 1/6;
+    border: 2px solid #cccccc;
+}
+
+.image-modal-secondary-image{
+    height: 100px;
+    width: 100px;
+    object-fit: scale-down;
+    border: 2px solid #cccccc;
+}
+
+.image-modal-secondary-image:active{
+    border: 2px solid cornflowerblue;
+}
+.image-modal-secondary-image:hover{
+    border: 2px solid cornflowerblue;
+}
+
+.image-modal-add-button{
+    height: 100px;
+    width: 100px;
+    outline: none;
+    border: none;
+    background-color: white;
+}
+.image-modal-add-button:hover{
+    background-color: #cccccc;
+}
+
+.image-modal-delete-button{
+    transform: translate(+780%, -15%);
+    position: absolute;
+    z-index: 5;
+    border: none;
+    outline: none;
+    background: none;
+
 }
