@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import Modal from "react-modal";
+import {axiosAPI} from "../../../util/axiosConfig";
 
 const ProductModal = (props) => {
-    const{isOpen, close, submit,  data, categories, manufacturers, currentProduct, ...otherProps} = props;
+    const{isOpen, close, submit,  data, categories, manufacturers, currentProduct} = props;
     const[name, setName] = useState("");
     const[category, setCategory] = useState("");
     const[manufacturer, setManufacturer] = useState("");
@@ -11,18 +12,34 @@ const ProductModal = (props) => {
     const[description, setDescription] = useState("");
     useEffect( () => {
             setName(currentProduct.name)
-            setCategory(currentProduct.manufacturer)
-            setManufacturer(currentProduct.category)
+            setCategory(currentProduct.category.name)
+            setManufacturer(currentProduct.manufacturer.name)
             setPrice(currentProduct.price)
             setStock(currentProduct.amountInStock)
-            setDescription(currentProduct.description)
+            setDescription(currentProduct.descr)
     }, [currentProduct])
-    const exit = () =>{
-        close()
-    }
+
     const save = () =>{
-        //submit()
-        close()
+        let url = "/products"
+        let obj = {
+            name: name,
+            manufacturer: {
+                id: manufacturers.find(item => item.name === manufacturer).id
+            },
+            category: {
+                id: categories.find(item => item.name === category).id
+            },
+            price: price,
+            amountInStock: stock,
+            descr: description
+        };
+        if (currentProduct.id){
+            obj["id"] = currentProduct.id;
+            url = url + "/" + currentProduct.id;
+            axiosAPI.put(url, obj).then(() => close())
+        } else {
+            axiosAPI.post(url, obj).then(() => close())
+        }
     }
     return (
         <Modal style={{
@@ -39,7 +56,7 @@ const ProductModal = (props) => {
         }}
                appElement={document.getElementById('root')} isOpen={isOpen} /*onRequestClose={close}*/>
             <div className={"control-modal"} >
-                <h2>New item <small><i className="fa fa-pencil fa-10x" /></small></h2>
+                <h2>{currentProduct.id ? currentProduct.id : "New item"} <small><i className="fa fa-pencil fa-10x" /></small></h2>
                 <div className={"control-modal-grid"}>
                     <table className={"control-modal-table"}>
                         <thead>
@@ -83,10 +100,10 @@ const ProductModal = (props) => {
                     </table>
                 <div className={"control-modal-description"}>
                     <div>Description:</div>
-                    <textarea value={description} onChange={e => setDescription(e.target.value)}/>
+                    <textarea value={description} value={description} onChange={e => setDescription(e.target.value)}/>
                 </div>
-                    <button className={"admin-control-button left-bottom-grid"} onClick={exit}>Close</button>
-                    <button className={"admin-control-button right-bottom-grid"} >Save</button>
+                    <button className={"admin-control-button left-bottom-grid"} onClick={close}>Close</button>
+                    <button className={"admin-control-button right-bottom-grid"} onClick={save}>Save</button>
                 </div>
             </div>
 

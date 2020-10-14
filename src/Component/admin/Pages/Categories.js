@@ -1,63 +1,74 @@
 import React, {useEffect, useState} from "react";
 import {axiosAPI} from "../../util/axiosConfig";
 import "../../../css/categories-window.css";
+import CategoriesModal from "./modal/CategoryModal";
 const Categories = () =>{
+    const defaultCategory = {id: "", name: ""}
     const[categories, setCategories] = useState(null);
-    const[newCategory, setNewCategory] = useState("");
-    const[parent, setParent] = useState(null);
+    const[error, setError] = useState("");
+    const[isModalOpen, setModalOpen] = useState(false);
+    const[currentCategory, setCurrentCategory] = useState(defaultCategory);
     useEffect(() => {
-
-        axiosAPI.get('/categories').then(res => setCategories(res.data))
+        reload()
     }, [])
-
-    const onClick = async () => {
-        await axiosAPI.post('/categories', {
-                name: newCategory,
-                parent
-            }
-        )
-        axiosAPI.get('/categories').then(res => this.setState({categories: res.data}))
+    const reload = () =>{
+        axiosAPI.get('/categories').then(res => setCategories(res.data._embedded.categoryModelList))
     }
-    const toFlatArray = (values) =>{
-        values.map(item => {
-            let result = []
-            while (item.subCategories.length !== 0){
-                result.push(item)
-                item = item.subCategories
-            }
-        })
+
+
+    const remove = (id) => {
+        axiosAPI.delete(`/categories/${id}`)
+            .then(() =>  reload())
+            .then(() => setError(""))
+            .catch(() => setError("Can't delete category. Delete products first."))
+
+    }
+
+    const openModal = (id) => {
+        setCurrentCategory(categories.find(item => item.id === id))
+        setModalOpen(true)
+
+    }
+    const closeModal = () => {
+        setCurrentCategory(defaultCategory)
+        setModalOpen(false)
+        reload()
     }
 
     return (
-        <div>
-            <table>
+        <div className={"admin-control-main-grid"}>
+            {<CategoriesModal isOpen={isModalOpen}
+                         close={closeModal}
+                         currentCategory={currentCategory}
+                         reload={reload}/>
+            }
+            <button className={"admin-control-button"} style={{justifySelf: "left"}} onClick={() => setModalOpen(true)}>Add new...</button>
+            <div/>
+
+            {error ? <div className={"delete-error"}>{error}</div>:<div>&nbsp;</div>}
+
+            <table className={"control-table"}>
                 <thead>
                 <tr>
-                    <td>id</td>
-                    <td>name</td>
-                    <td>parent</td>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Options</th>
                 </tr>
                 </thead>
                 <tbody>
-                {categories && categories._embedded.categoryModelList.flat().map(item => (
-                    <tr>
+                {categories && categories.map(item =>
+                    <tr key={item.id}>
                         <td>{item.id}</td>
                         <td>{item.name}</td>
-                    </tr>
-                ))}
+                        <td>
+                            <button className={"icon-button"}><i className="fa fa-edit" onClick={() => openModal(item.id)} /></button>
+                            <button className={"icon-button"}><i className="fa fa-trash" onClick={() => remove(item.id)}/></button>
+                        </td>
+                </tr>)}
+
                 </tbody>
-            </table>
+                </table>
         </div>
     );
 }
 export default Categories
-
-/*
-<div>
-<br/>
-<input name={"newCategory"} value={newCategory.name} type={"text"} onChange={e => setNewCategory(e.target.value)}/>
-<button onClick={onClick}>Add</button>
-{categories ?
-    <Category progeny={categories._embedded.categoryModelList} level={0}/> :
-    <div>Loading...</div>}
-</div>*/

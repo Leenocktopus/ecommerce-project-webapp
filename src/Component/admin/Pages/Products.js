@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {axiosAPI} from "../../util/axiosConfig";
 import "../../../css/categories-window.css";
 import ProductModal from "./modal/ProductModal";
-import ImagesModal from "./modal/ImagesModal";
+import ImageModal from "./modal/ImageModal";
 
 const Products = () =>{
     const defaultProduct = {
@@ -16,13 +16,15 @@ const Products = () =>{
         totalScore: "",
         images: []
     };
+    const defaultLink = "/products?page=0&size=25";
     const[products, setProducts] = useState(null);
-    const[currentLink, setCurrentLink] = useState("/products?page=0&size=25");
+    const[currentLink, setCurrentLink] = useState(defaultLink);
     const[links, setLinks] = useState({prev: null, next: null});
     const[search, setSearch] = useState("");
     const[isProductModalOpen, setProductModalOpen] = useState(false);
     const[isImageModalOpen, setImageModalOpen] = useState(false);
     const[currentProduct, setCurrentProduct] = useState(defaultProduct);
+
 
     const[categories, setCategories] = useState(null);
     const[manufacturers, setManufacturers] = useState(null);
@@ -41,7 +43,6 @@ const Products = () =>{
     }, [products])
 
     const reload = () =>{
-        console.log("abc")
         axiosAPI.get(currentLink)
             .then(res => setProducts(res.data))
     }
@@ -63,6 +64,7 @@ const Products = () =>{
         setCurrentProduct(defaultProduct)
         setProductModalOpen(false)
         setImageModalOpen(false)
+        reload()
     }
 
     const openImageModalWithProduct = (id) =>{
@@ -70,6 +72,13 @@ const Products = () =>{
         setImageModalOpen(true);
     }
 
+    const startSearch = () =>{
+        setCurrentLink(`${defaultLink}&search=${search}`)
+    }
+
+    const remove = (id) =>{
+        axiosAPI.delete(`/products/${id}`)
+    }
     return (
         <div className={"admin-control-main-grid"}>
             {(manufacturers && categories) &&
@@ -80,15 +89,15 @@ const Products = () =>{
                               currentProduct={currentProduct}
                               reload={reload}/>
             }
-            {<ImagesModal isOpen={isImageModalOpen}
-                          close={closeModal}
-                          currentProduct={currentProduct}
-                          reload={reload}/>
+            {<ImageModal isOpen={isImageModalOpen}
+                         close={closeModal}
+                         currentProduct={currentProduct}
+                         reload={reload}/>
             }
             <button className={"admin-control-button"} style={{justifySelf: "left"}} onClick={() => openProductModal()}>Add new...</button>
             <div className={"admin-control-search"}>
                 <input type={"text"} className={"admin-control-input"} value={search} onChange={e => setSearch(e.target.value)}/>
-                <button className={"admin-control-button"}>Search</button>
+                <button className={"admin-control-button"} onClick={startSearch}>Search</button>
             </div>
             <table className={"control-table"}>
                 <thead>
@@ -120,10 +129,10 @@ const Products = () =>{
                             <td>{item.amountInStock}</td>
                             <td>{item.popularity}</td>
                             <td>{item.totalScore}</td>
-                            <td><button className={"icon-button"}><i className="fa fa-trash"/></button>
+                            <td>
                                 <button className={"icon-button"} onClick={() => openProductModalWithProduct(item.id)}><i className="fa fa-edit"/></button>
                                 <button className={"icon-button"} onClick={() => openImageModalWithProduct(item.id)}><i className="fa fa-picture-o"/></button>
-
+                                <button className={"icon-button"}><i className="fa fa-trash" onClick={() => remove(item.id)}/></button>
                             </td>
                         </tr>
                     ))}

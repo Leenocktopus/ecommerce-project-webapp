@@ -42,7 +42,14 @@
     height: 20px;
     background-color: inherit;
 }
-
+.delete-error{
+    font-size: 12pt;
+    color: maroon;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: salmon;
+    border-radius: 5px;
+}
 .admin-control-input, .admin-control-select, .control-modal-grid textarea {
     font-size: 14px;
     padding: 6px 10px;

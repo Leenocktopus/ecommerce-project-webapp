@@ -6,7 +6,6 @@ import "../../css/admin-panel.css";
 import AdminMenu from "./AdminMenu";
 import Products from "./Pages/Products";
 import Orders from "./Pages/Orders";
-import Users from "./Pages/Users";
 import MainContent from "./Pages/MainContent";
 import Settings from "./Pages/Settings";
 import NotFound from "./Pages/NotFound";
@@ -24,7 +23,6 @@ const AdminWindow = ({match}) => (
                         <Route exact path={`${match.url}/manufacturers`} component={Manufacturers}/>
                         <Route exact path={`${match.url}/products`} component={Products}/>
                         <Route exact path={`${match.url}/orders`} component={Orders}/>
-                        <Route exact path={`${match.url}/users`} component={Users}/>
                         <Route exact path={`${match.url}/settings`} component={Settings}/>
                         <Route exact path={`${match.url}/main`} component={MainContent}/>
                         <Route path={"*"} component={NotFound}/> {/*Maybe change to another*/}

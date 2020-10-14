@@ -37,7 +37,6 @@ const AdminMenu = ({user, setAccessToken, setUser, ...otherProps}) => {
                              to={"/admin/manufacturers"}>Manufacturers</NavLink></li>
                 <li><NavLink activeClassName={"admin-active-menu-link"} to={"/admin/products"}>Products</NavLink></li>
                 <li><NavLink activeClassName={"admin-active-menu-link"} to={"/admin/orders"}>Orders</NavLink></li>
-                <li><NavLink activeClassName={"admin-active-menu-link"} to={"/admin/users"}>Users</NavLink></li>
                 <li><NavLink activeClassName={"admin-active-menu-link"} to={"/admin/settings"}><span
                     className="glyphicon glyphicon-cog"/> Settings</NavLink></li>
                 <li><NavLink activeClassName={"admin-active-menu-link"} to={"/admin/login"}>

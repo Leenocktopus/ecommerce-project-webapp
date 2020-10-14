@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import Modal from "react-modal";
 import plus_image from "../../../../css/61183.png";
 import {axiosAPI} from "../../../util/axiosConfig";
-const ImagesModal = ({isOpen, close, reload, currentProduct, ...otherProps}) => {
+const ImageModal = ({isOpen, close, reload, currentProduct, ...otherProps}) => {
     const fileField = useRef();
     const[images, setImages] = useState(null);
     const[mainImage, setMainImage] = useState(null);
@@ -17,19 +17,21 @@ const ImagesModal = ({isOpen, close, reload, currentProduct, ...otherProps}) => 
         const imagesToDelete = currentProduct.images.filter(image => !images.includes(image))
         const imagesToAdd = images.filter(image => !currentProduct.images.includes(image))
 
-        imagesToDelete.forEach(item => axiosAPI.delete(`/products/${product}/images/${item.id}`), )
+        imagesToDelete.forEach((item, index) =>
+            axiosAPI.delete(`/products/${product}/images/${item.id}`)
+            .then(() => index === imagesToDelete.length-1 && imagesToAdd.length===0 && close()), )
 
         for (let i = 0; i < imagesToAdd.length; i++) {
             let reader = new FileReader();
             reader.onloadend =  (e) => {
                 axiosAPI.post(`products/${product}/images`, {
                     encodedImage: e.target.result.split(",")[1]
-                })
+                }).then(() => i === imagesToAdd.length-1 && close())
             }
             reader.readAsDataURL(imagesToAdd[i].blob)
         }
-        reload();
-        close()
+
+
     }
 
     const loadImages = (e) =>{
@@ -103,4 +105,4 @@ const ImagesModal = ({isOpen, close, reload, currentProduct, ...otherProps}) => 
         </Modal>
     );
 }
-export default ImagesModal
+export default ImageModal

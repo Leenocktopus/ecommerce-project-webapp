@@ -25,7 +25,7 @@ axiosAPI.interceptors.request.use(async (config) => {
     }
     config.headers.post["Authorization"] = `Bearer ${token}`
     config.headers.delete["Authorization"] = `Bearer ${token}`
-    console.log(config)
+    config.headers.put["Authorization"] = `Bearer ${token}`
     return config;
 }, error => {
     console.log(error);
