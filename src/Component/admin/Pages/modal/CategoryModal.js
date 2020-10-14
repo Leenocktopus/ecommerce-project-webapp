@@ -9,7 +9,7 @@ const CategoriesModal = (props) => {
         setName(currentCategory.name)
     }, [currentCategory])
 
-
+    // TODO name validation
     const save = () =>{
         if (currentCategory.id){
             axiosAPI.put(`/categories/${currentCategory.id}`, {name}).then(() => close())

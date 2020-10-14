@@ -6,13 +6,13 @@ import AdminWindow from "./Component/admin/AdminWindow";
 import "./css/global.css";
 import Login from "./Component/admin/Pages/Login";
 
-import AdminRoute from "./Component/admin/LoggedOutRoute";
 import {axiosSecurity} from "./Component/util/axiosConfig";
 import {connect} from "react-redux";
 import {setAccessToken} from "./Component/redux/actions/tokenActions";
-import PlebRoute from "./Component/admin/LoggedInRoute";
 import NotFound from "./Component/admin/Pages/NotFound";
 import MainPage from "./Component/user/MainPage";
+import LoggedOutRoute from "./Component/admin/LoggedOutRoute";
+import LoggedInRoute from "./Component/admin/LoggedInRoute";
 
 const App = ({setAccessToken, ...otherProps}) => {
     const [loading, setLoading] = useState(true);
@@ -30,8 +30,8 @@ const App = ({setAccessToken, ...otherProps}) => {
         <Router>
             <ScrollToTop>
                 {!loading && <Switch>
-                    <PlebRoute exact path={'/admin/login'} component={Login}/>
-                    <AdminRoute path={'/admin'} component={AdminWindow}/>
+                    <LoggedInRoute exact path={'/admin/login'} component={Login}/>
+                    <LoggedOutRoute path={'/admin'} component={AdminWindow}/>
                     <Route path={'/'} component={MainPage}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>}

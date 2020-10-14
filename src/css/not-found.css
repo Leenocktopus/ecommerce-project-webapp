@@ -1,9 +1,10 @@
 .error-page {
+    width: 50%;
     text-align: center;
+    margin: auto;
 }
 
-.error-page hr {
-    border: none;
-    height: 1px;
-    background-color: #333;
+.error-page h2 {
+    border-bottom: 1px solid #666666;
+
 }

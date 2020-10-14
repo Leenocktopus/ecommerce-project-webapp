@@ -9,7 +9,7 @@ const ManufacturersModal = (props) => {
         setName(currentManufacturer.name)
     }, [currentManufacturer])
 
-
+    // TODO name validation
     const save = () =>{
         if (currentManufacturer.id){
             axiosAPI.put(`/manufacturers/${currentManufacturer.id}`, {name}).then(() => close())
