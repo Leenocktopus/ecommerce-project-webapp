@@ -3,15 +3,15 @@ import Modal from "react-modal";
 import {axiosAPI} from "../../../util/axiosConfig";
 
 const CategoriesModal = (props) => {
-    const{isOpen, close, currentCategory} = props;
-    const[name, setName] = useState("");
-    useEffect( () => {
+    const {isOpen, close, currentCategory} = props;
+    const [name, setName] = useState("");
+    useEffect(() => {
         setName(currentCategory.name)
     }, [currentCategory])
 
     // TODO name validation
-    const save = () =>{
-        if (currentCategory.id){
+    const save = () => {
+        if (currentCategory.id) {
             axiosAPI.put(`/categories/${currentCategory.id}`, {name}).then(() => close())
         } else {
             axiosAPI.post('/categories', {name}).then(() => close())
@@ -20,8 +20,7 @@ const CategoriesModal = (props) => {
     }
     return (
         <Modal style={{
-            overlay: {
-            },
+            overlay: {},
             content: {
                 borderRadius: 10,
                 padding: 0,
@@ -32,24 +31,26 @@ const CategoriesModal = (props) => {
             }
         }}
                appElement={document.getElementById('root')} isOpen={isOpen}>
-            <div className={"control-modal"} >
-                <h2>{currentCategory.id ? currentCategory.id : "New item"} <small><i className="fa fa-pencil fa-10x" /></small></h2>
-                <div className={"control-modal-grid"} >
+            <div className={"control-modal"}>
+                <h2>{currentCategory.id ? currentCategory.id : "New item"} <small><i
+                    className="fa fa-pencil fa-10x"/></small></h2>
+                <div className={"control-modal-grid"}>
                     <table className={"control-modal-table"}>
                         <thead>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>Name: </td>
+                            <td>Name:</td>
                             <td>
-                                <input className={"admin-control-input"} type={"text"} value={name} onChange={e => setName(e.target.value)}/>
+                                <input className={"admin-control-input"} type={"text"} value={name}
+                                       onChange={e => setName(e.target.value)}/>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <div/>
-                        <button className={"admin-control-button left-bottom-grid"} onClick={close}>Close</button>
-                        <button className={"admin-control-button right-bottom-grid"} onClick={save}>Save</button>
+                    <button className={"admin-control-button left-bottom-grid"} onClick={close}>Close</button>
+                    <button className={"admin-control-button right-bottom-grid"} onClick={save}>Save</button>
                 </div>
             </div>
 

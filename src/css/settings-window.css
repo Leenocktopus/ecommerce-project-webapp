@@ -1,4 +1,4 @@
-#settings-container{
+#settings-container {
     margin: 30px;
     padding: 10px;
 }
@@ -13,17 +13,19 @@
     width: 300px;
 }
 
-.labels{
+.labels {
     font-weight: 600;
     margin: 10px 0 6px 10px;
 }
-.section-heading{
+
+.section-heading {
     font-size: 14pt;
     width: 350px;
     border-bottom: 1px solid #cccccc;
     padding: 10px 20px;
 }
-.settings-button{
+
+.settings-button {
     font-weight: bolder;
     padding: 7px 10px;
     border: none;
@@ -35,7 +37,8 @@
     border-radius: 5px;
     margin: 10px;
 }
-.settings-error{
+
+.settings-error {
     color: maroon;
     font-weight: bolder;
 }

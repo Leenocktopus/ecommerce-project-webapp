@@ -24,9 +24,8 @@ const AdminMenu = ({user, setAccessToken, setUser, ...otherProps}) => {
                 <h4>e&#8209;commerce project</h4>
                 <hr/>
                 {user && <>
-                    <h3>{user.firstName + " " + user.lastName}</h3>
-                    <h3>{user.username}</h3>
-                    <h5>{user.email}</h5>
+                    <h3>Current user: </h3>
+                    <h2><i className={"fa fa-user"}/> {user.username}</h2>
                 </>}
                 <hr/>
             </div>

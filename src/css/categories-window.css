@@ -1,30 +1,32 @@
 
-.control-table{
+.control-table {
     grid-column: 1/3;
     margin-top: 40px;
     border-collapse: collapse;
     border-spacing: 0;
-    box-shadow: 0 1px 15px rgba(64,64,64,.7);
+    box-shadow: 0 1px 15px rgba(64, 64, 64, .7);
     border-radius: 12px 12px 0 0;
     overflow: hidden;
 }
 
-.control-table td{
+.control-table td {
     padding: 7px 11px;
     font-size: 16px;
 }
 
-.control-table th{
+.control-table th {
     padding: 7px 11px;
 }
 
-.control-table tr{
+.control-table tr {
     background-color: #fafafa;
 }
-.control-table tr:nth-child(even){
+
+.control-table tr:nth-child(even) {
     background-color: #eeeeee;
 }
-.admin-control-button{
+
+.admin-control-button {
     font-weight: bolder;
     padding: 7px 10px;
     border: none;
@@ -37,13 +39,14 @@
 
 }
 
-.icon-button{
+.icon-button {
     border: none;
     width: 20px;
     height: 20px;
     background-color: inherit;
 }
-.delete-error{
+
+.delete-error {
     font-size: 12pt;
     color: maroon;
     margin-top: 20px;
@@ -51,6 +54,7 @@
     background-color: salmon;
     border-radius: 5px;
 }
+
 .admin-control-input, .admin-control-select, .control-modal-grid textarea {
     font-size: 14px;
     padding: 6px 10px;
@@ -59,31 +63,35 @@
     outline: none;
     margin: 0 10px;
 }
-.admin-control-main-grid{
+
+.admin-control-main-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin: 20px;
 }
-.admin-control-search{
+
+.admin-control-search {
     justify-self: right;
 }
-#new-button{
+
+#new-button {
     justify-self: left;
 }
-.admin-control-image{
+
+.admin-control-image {
     height: 40px;
     width: 40px;
     object-fit: scale-down;
 }
 
-.control-modal h2{
+.control-modal h2 {
     width: 100%;
     margin: 0;
     padding: 15px 0 15px 30px;
     border-bottom: 2px solid #cccccc;
 }
 
-.control-modal-grid{
+.control-modal-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 30px;
@@ -91,7 +99,8 @@
     margin-top: 10px;
 
 }
-.control-modal-grid textarea{
+
+.control-modal-grid textarea {
     width: 100%;
     height: 100%;
     resize: none;
@@ -99,49 +108,54 @@
     margin: 0;
 }
 
-.control-modal-table input, .control-modal-table select{
+.control-modal-table input, .control-modal-table select {
     width: 100%;
     margin-top: 10px;
 }
 
 
-.left-bottom-grid{
+.left-bottom-grid {
     justify-self: left;
-    align-self:end;
+    align-self: end;
 }
-.right-bottom-grid{
+
+.right-bottom-grid {
     justify-self: right;
-    align-self:end;
+    align-self: end;
 }
-.control-modal-grid button{
+
+.control-modal-grid button {
     margin-top: 50px;
 }
 
-.admin-prev-button, .admin-next-button{
+.admin-prev-button, .admin-next-button {
     border-radius: 0;
     border: 2px solid whitesmoke;
     width: 90px;
     margin-top: 20px;
 
 }
-.admin-prev-button:disabled, .admin-next-button:disabled{
+
+.admin-prev-button:disabled, .admin-next-button:disabled {
     background-color: rgba(100, 149, 237, 0.65);
 }
 
 
-.image-modal{
+.image-modal {
     display: grid;
     margin: 10px 20px;
     grid-template-columns: repeat(2, 1fr);
 }
-.images-grid{
+
+.images-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     margin-bottom: 30px;
     grid-column: 1/3;
 
 }
-.image-modal-main-image{
+
+.image-modal-main-image {
     height: 350px;
     width: 350px;
     object-fit: scale-down;
@@ -150,32 +164,34 @@
     border: 2px solid #cccccc;
 }
 
-.image-modal-secondary-image{
+.image-modal-secondary-image {
     height: 100px;
     width: 100px;
     object-fit: scale-down;
     border: 2px solid #cccccc;
 }
 
-.image-modal-secondary-image:active{
-    border: 2px solid cornflowerblue;
-}
-.image-modal-secondary-image:hover{
+.image-modal-secondary-image:active {
     border: 2px solid cornflowerblue;
 }
 
-.image-modal-add-button{
+.image-modal-secondary-image:hover {
+    border: 2px solid cornflowerblue;
+}
+
+.image-modal-add-button {
     height: 100px;
     width: 100px;
     outline: none;
     border: none;
     background-color: white;
 }
-.image-modal-add-button:hover{
+
+.image-modal-add-button:hover {
     background-color: #cccccc;
 }
 
-.image-modal-delete-button{
+.image-modal-delete-button {
     transform: translate(+780%, -15%);
     position: absolute;
     z-index: 5;
@@ -184,3 +200,48 @@
     background: none;
 
 }
+
+.admin-product-card {
+    margin: 10px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+
+.admin-product-card img {
+    height: 40px;
+    width: 40px;
+    object-fit: scale-down;
+    justify-self: center;
+    grid-row: 1/3;
+}
+
+.admin-order-total {
+    text-align: right;
+    margin: 10px;
+    font-size: 14pt;
+}
+
+.admin-order-cancel {
+    text-align: center;
+}
+
+.admin-order-status-cancelled {
+    background-color: salmon;
+}
+
+.admin-order-status-pending {
+    background-color: #fafa37;
+}
+
+.admin-order-status-completed {
+    background-color: forestgreen;
+}
+
+option:hover {
+    background-color: whitesmoke;
+}
+
+

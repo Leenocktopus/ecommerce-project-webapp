@@ -3,15 +3,15 @@ import Modal from "react-modal";
 import {axiosAPI} from "../../../util/axiosConfig";
 
 const ManufacturersModal = (props) => {
-    const{isOpen, close, currentManufacturer} = props;
-    const[name, setName] = useState("");
-    useEffect( () => {
+    const {isOpen, close, currentManufacturer} = props;
+    const [name, setName] = useState("");
+    useEffect(() => {
         setName(currentManufacturer.name)
     }, [currentManufacturer])
 
     // TODO name validation
-    const save = () =>{
-        if (currentManufacturer.id){
+    const save = () => {
+        if (currentManufacturer.id) {
             axiosAPI.put(`/manufacturers/${currentManufacturer.id}`, {name}).then(() => close())
         } else {
             axiosAPI.post('/manufacturers', {name}).then(() => close())
@@ -20,8 +20,7 @@ const ManufacturersModal = (props) => {
     }
     return (
         <Modal style={{
-            overlay: {
-            },
+            overlay: {},
             content: {
                 borderRadius: 10,
                 padding: 0,
@@ -32,17 +31,19 @@ const ManufacturersModal = (props) => {
             }
         }}
                appElement={document.getElementById('root')} isOpen={isOpen}>
-            <div className={"control-modal"} >
-                <h2>{currentManufacturer.id ? currentManufacturer.id : "New item"} <small><i className="fa fa-pencil fa-10x" /></small></h2>
-                <div className={"control-modal-grid"} >
+            <div className={"control-modal"}>
+                <h2>{currentManufacturer.id ? currentManufacturer.id : "New item"} <small><i
+                    className="fa fa-pencil fa-10x"/></small></h2>
+                <div className={"control-modal-grid"}>
                     <table className={"control-modal-table"}>
                         <thead>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>Name: </td>
+                            <td>Name:</td>
                             <td>
-                                <input className={"admin-control-input"} type={"text"} value={name} onChange={e => setName(e.target.value)}/>
+                                <input className={"admin-control-input"} type={"text"} value={name}
+                                       onChange={e => setName(e.target.value)}/>
                             </td>
                         </tr>
                         </tbody>

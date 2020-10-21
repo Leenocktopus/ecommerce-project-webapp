@@ -5,6 +5,7 @@ import "../../../css/settings-window.css";
 import {axiosSecurity} from "../../util/axiosConfig";
 import jwtDecode from "jwt-decode";
 import {setAccessToken} from "../../redux/actions/tokenActions";
+
 const Setting = ({user, setUser, token, history}) => {
 
     const [firstName, setFirstName] = useState(user.firstName);
@@ -43,8 +44,8 @@ const Setting = ({user, setUser, token, history}) => {
     }
     const changeEmail = () => {
         setEmailError("")
-        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (re.test(String(email).toLowerCase())){
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(String(email).toLowerCase())) {
             axiosSecurity.put(`${url}/email`, {
                     email
                 }, config
@@ -78,7 +79,7 @@ const Setting = ({user, setUser, token, history}) => {
         <div id={"settings-container"}>
             <div className={"section-heading"}>Profile</div>
             <div>
-                <div className={"labels"}>First name </div>
+                <div className={"labels"}>First name</div>
                 <input className={"settings-input"} name={"firstName"} type={"text"}
                        onChange={e => setFirstName(e.target.value)} value={firstName} autoComplete="off"/>
             </div>

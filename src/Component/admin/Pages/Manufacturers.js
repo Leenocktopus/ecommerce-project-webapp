@@ -4,22 +4,22 @@ import ManufacturersModal from "./modal/ManufacturerModal";
 
 const Manufacturers = () => {
     const defaultManufacturer = {id: "", name: ""}
-    const[manufacturers, setManufacturers] = useState(null);
-    const[error, setError] = useState("");
-    const[isModalOpen, setModalOpen] = useState("");
-    const[currentManufacturer, setCurrentManufacturer] = useState("");
+    const [manufacturers, setManufacturers] = useState(null);
+    const [error, setError] = useState("");
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [currentManufacturer, setCurrentManufacturer] = useState("");
     useEffect(() => {
         reload()
-    },[])
+    }, [])
 
-    const reload = () =>{
+    const reload = () => {
         axiosAPI.get('/manufacturers').then(res => setManufacturers(res.data._embedded.manufacturerModelList))
     }
 
 
     const remove = (id) => {
         axiosAPI.delete(`/manufacturers/${id}`)
-            .then(() =>  reload())
+            .then(() => reload())
             .then(() => setError(""))
             .catch(() => setError("Can't delete manufacturer. Delete products first."))
     }
@@ -37,14 +37,16 @@ const Manufacturers = () => {
     return (
         <div className={"admin-control-main-grid"}>
             {<ManufacturersModal isOpen={isModalOpen}
-                              close={closeModal}
-                              currentManufacturer={currentManufacturer}
-                              reload={reload}/>
+                                 close={closeModal}
+                                 currentManufacturer={currentManufacturer}
+                                 reload={reload}/>
             }
-            <button className={"admin-control-button"} style={{justifySelf: "left"}} onClick={() => setModalOpen(true)}>Add new...</button>
+            <button className={"admin-control-button"} style={{justifySelf: "left"}}
+                    onClick={() => setModalOpen(true)}>Add new...
+            </button>
             <div/>
 
-            {error ? <div className={"delete-error"}>{error}</div>:<div>&nbsp;</div>}
+            {error ? <div className={"delete-error"}>{error}</div> : <div>&nbsp;</div>}
 
             <table className={"control-table"}>
                 <thead>
@@ -60,8 +62,10 @@ const Manufacturers = () => {
                         <td>{item.id}</td>
                         <td>{item.name}</td>
                         <td>
-                            <button className={"icon-button"}><i className="fa fa-edit" onClick={() => openModal(item.id)}/></button>
-                            <button className={"icon-button"}><i className="fa fa-trash" onClick={() => remove(item.id)}/></button>
+                            <button className={"icon-button"}><i className="fa fa-edit"
+                                                                 onClick={() => openModal(item.id)}/></button>
+                            <button className={"icon-button"}><i className="fa fa-trash"
+                                                                 onClick={() => remove(item.id)}/></button>
                         </td>
                     </tr>)}
 
