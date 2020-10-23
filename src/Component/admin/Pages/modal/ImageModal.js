@@ -76,10 +76,10 @@ const ImageModal = ({isOpen, close, currentProduct, ...otherProps}) => {
                         <img alt={"main-product"} className={"image-modal-main-image"} src={
                             'filename' in mainImage ? `http://localhost:8080/images/${product}/${mainImage.filename}` : mainImage.image}/>
                         {images.map((item, index) => (
-                            <div>
+                            <div key={item.id}>
                                 <button className={"image-modal-delete-button"} onClick={() => removeImage(item.id)}><i
                                     className="fa fa-times"/></button>
-                                <img key={item.id}
+                                <img
                                      className={"image-modal-secondary-image"}
                                      src={'filename' in item ? `http://localhost:8080/images/${product}/${item.filename}` :
                                          item.image}

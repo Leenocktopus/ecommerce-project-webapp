@@ -27,7 +27,7 @@ const Setting = ({user, setUser, token, history}) => {
             authorization: `Bearer ${token}`
         }
     }
-    const url = `/users/${jwtDecode(token)["sub"]}`;
+    var url = `/users/${jwtDecode(token)["sub"]}`;
     const changePassword = () => {
         console.log(history)
         if (newPassword === repeatPassword) {
@@ -62,6 +62,7 @@ const Setting = ({user, setUser, token, history}) => {
                 username
             }, config
         ).then(response => setUser(response.data))
+            .then(() => window.location.reload(false))
             .catch(() => setUsernameError("Username is already taken"))
     }
 

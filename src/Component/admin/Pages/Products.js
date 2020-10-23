@@ -17,6 +17,11 @@ const Products = () => {
         totalScore: "",
         images: []
     };
+    const defaultAttributes = {
+        id: 0,
+        name: "",
+        value: ""
+    };
     const defaultLink = "/products?page=0&size=25";
     const [products, setProducts] = useState(null);
     const [currentLink, setCurrentLink] = useState(defaultLink);
@@ -29,6 +34,7 @@ const Products = () => {
 
     const [categories, setCategories] = useState(null);
     const [manufacturers, setManufacturers] = useState(null);
+    const [attributes, setAttributes] = useState([]);
 
     useEffect(() => {
         reload()
@@ -58,11 +64,16 @@ const Products = () => {
     }
     const openProductModalWithProduct = (id) => {
         setCurrentProduct(products._embedded.productModelList.find(item => item.id === id))
+        axiosAPI.get(`/products/${id}/attributes`)
+            .then(res => {if(res.data._embedded){
+            setAttributes(res.data._embedded.productAttributeModelList)
+        }})
         openProductModal()
     }
 
     const closeModal = () => {
         setCurrentProduct(defaultProduct)
+        setAttributes([])
         setProductModalOpen(false)
         setImageModalOpen(false)
         reload()
@@ -74,7 +85,7 @@ const Products = () => {
     }
 
     const startSearch = () => {
-        setCurrentLink(`${defaultLink}&search=${search}`)
+        setCurrentLink(`/products?page=0&size=${500000}&search=${search}`)
     }
 
     const remove = (id) => {
@@ -88,7 +99,8 @@ const Products = () => {
                           close={closeModal}
                           categories={categories}
                           manufacturers={manufacturers}
-                          currentProduct={currentProduct}/>
+                          currentProduct={currentProduct}
+                          attr={attributes}/>
             }
             {<ImageModal isOpen={isImageModalOpen}
                          close={closeModal}

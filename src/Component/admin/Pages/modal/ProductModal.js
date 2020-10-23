@@ -3,13 +3,14 @@ import Modal from "react-modal";
 import {axiosAPI} from "../../../util/axiosConfig";
 
 const ProductModal = (props) => {
-    const {isOpen, close, categories, manufacturers, currentProduct} = props;
+    const {isOpen, close, categories, manufacturers, attr, currentProduct} = props;
     const [name, setName] = useState("");
     const [category, setCategory] = useState("");
     const [manufacturer, setManufacturer] = useState("");
     const [price, setPrice] = useState("");
     const [stock, setStock] = useState("");
     const [description, setDescription] = useState("");
+    const [attributes, setAttributes] = useState([]);
     useEffect(() => {
         setName(currentProduct.name)
         setPrice(currentProduct.price)
@@ -18,10 +19,18 @@ const ProductModal = (props) => {
         if (!currentProduct.id) {
             setCategory(categories[0].name)
             setManufacturer(manufacturers[0].name)
+        } else {
+            setCategory(currentProduct.category.name)
+            setManufacturer(currentProduct.manufacturer.name)
+            setAttributes(attr)
         }
-    }, [currentProduct])
 
+    }, [currentProduct, attr])
 
+    const closeModal = () => {
+        setAttributes("")
+        close()
+    }
     const save = () => {
         let url = "/products"
         let obj = {
@@ -39,11 +48,32 @@ const ProductModal = (props) => {
         if (currentProduct.id) {
             obj["id"] = currentProduct.id;
             url = url + "/" + currentProduct.id;
-            axiosAPI.put(url, obj).then(() => close())
+            axiosAPI.put(url, obj).then((res) => saveAttributes(res.data.id)).then(() => closeModal())
         } else {
-            axiosAPI.post(url, obj).then(() => close())
+            axiosAPI.post(url, obj).then((res) => saveAttributes(res.data.id)).then(() => closeModal())
         }
     }
+    const saveAttributes = (id) =>{
+
+        const attrIds = attr.map(item => item.id)
+        const attributesIds = attributes.map(item => item.id)
+        const attributesToDelete = attr.filter(
+            attribute => !attributesIds.includes(attribute.id))
+        const attributesToChange = attributes.filter(
+            attribute => attrIds.includes(attribute.id) && !attr.includes(attribute))
+        const attributesToAdd = attributes.filter(attribute => !attrIds.includes(attribute.id))
+            .map(item => ({
+                name: item.name,
+                value: item.value
+            }))
+        let url = `/products/${id}/attributes`
+        attributesToDelete.forEach(item => axiosAPI.delete(`${url}/${item.id}`))
+
+        attributesToChange.forEach(item => axiosAPI.put(`${url}/${item.id}`, item))
+
+        attributesToAdd.forEach(item => axiosAPI.post(url, item))
+    }
+
 
     return (
         <Modal style={{
@@ -111,7 +141,55 @@ const ProductModal = (props) => {
                         <div>Description:</div>
                         <textarea value={description} onChange={e => setDescription(e.target.value)}/>
                     </div>
-                    <button className={"admin-control-button left-bottom-grid"} onClick={close}>Close</button>
+                    <div className={"control-modal-attributes"}>
+                        <table className={"attributes-table"}>
+                            <thead>
+                            <tr>
+                                <th className={"attributes-heading"}>Name</th>
+                                <th className={"attributes-heading"}>Value</th>
+                                <th/>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {attributes && attributes.map(item =>
+                                <tr key={item.id}>
+                                    <td><input className={"admin-control-input"} type={"text"} value={item.name}
+                                               onChange={(e) => {
+                                                   const name = e.target.value
+                                                   setAttributes((currentAttr) => currentAttr.map(x => x.id === item.id ? {
+                                                       ...x,
+                                                       name
+                                                   } : x))
+                                               }}/></td>
+                                    <td><input className={"admin-control-input"} type={"text"} value={item.value}
+                                               onChange={(e) => {
+                                                   const value = e.target.value
+                                                   setAttributes((currentAttr) => currentAttr.map(x => x.id === item.id ? {
+                                                       ...x,
+                                                       value
+                                                   } : x))
+                                               }}/></td>
+                                    <td>
+                                        <button className={"icon-button remove-attribute"}
+                                                onClick={() => {setAttributes(
+                                                    currentAttr => currentAttr.filter(x => x.id !== item.id))}}>
+                                            {"\u2716"}
+                                        </button>
+                                    </td>
+                                </tr>
+                            )}
+                            </tbody>
+                        </table>
+                        <button className={"admin-control-button left-bottom-grid"}
+                                onClick={() => {setAttributes(currentAttr => [...currentAttr, {
+                            id: (Math.random() / Math.random()) / Date.now(),
+                            name: "",
+                            value: ""
+                        }])}}>Add new..</button>
+                    </div>
+
+
+                    <button className={"admin-control-button left-bottom-grid"} onClick={closeModal}>Close</button>
                     <button className={"admin-control-button right-bottom-grid"} onClick={save}>Save</button>
                 </div>
             </div>
