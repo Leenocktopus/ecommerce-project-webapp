@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
-import not_found from "../../../../css/images/not_found.png"
+import not_found from "../../../../styles/images/not_found.png"
 
 const OrderModal = (props) => {
     const {isOpen, close, order} = props;

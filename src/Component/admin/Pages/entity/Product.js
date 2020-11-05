@@ -1,5 +1,5 @@
 import React from "react";
-import not_found from "../../../../css/images/not_found.png";
+import not_found from "../../../../styles/images/not_found.png";
 
 const Product = (props) => {
     const {products, openProductModalWithProduct, openImageModalWithProduct, remove} = props;

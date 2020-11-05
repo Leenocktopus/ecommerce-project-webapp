@@ -4,6 +4,7 @@ class AboutAndContacts extends Component {
     render() {
         return (
             <div>
+                Contacts
 
             </div>
         );

@@ -6,22 +6,23 @@ import {setAccessToken} from "./Component/redux/actions/tokenActions";
 
 import ScrollToTop from "./Component/util/ScrollToTop";
 import NotFound from "./Component/admin/Pages/NotFound";
-import MainPage from "./Component/user/MainPage";
 import LoggedOutRoute from "./Component/admin/LoggedOutRoute";
 import LoggedInRoute from "./Component/admin/LoggedInRoute";
 import AdminWindow from "./Component/admin/AdminWindow";
 import Login from "./Component/admin/Pages/Login";
+import UserPage from "./Component/user/UserPage";
 
-import "./css/admin/global.css";
-import "./css/admin/admin-window.css";
-import "./css/admin/menu.css";
-import "./css/admin/not-found.css";
-import "./css/admin/login-window.css";
-import "./css/admin/settings-window.css"
-import "./css/admin/modal.css"
-import "./css/admin/image-modal.css"
-import "./css/admin/page-specific.css"
-
+import "./styles/admin/global.css";
+import "./styles/admin/admin-window.css";
+import "./styles/admin/menu.css";
+import "./styles/admin/not-found.css";
+import "./styles/admin/login-window.css";
+import "./styles/admin/settings-window.css"
+import "./styles/admin/modal.css"
+import "./styles/admin/image-modal.css"
+import "./styles/admin/page-specific.css"
+import "./styles/user/header.css"
+import "./styles/user/main-page.css"
 
 const App = ({setAccessToken, ...otherProps}) => {
     const [loading, setLoading] = useState(true);
@@ -40,7 +41,7 @@ const App = ({setAccessToken, ...otherProps}) => {
                 {!loading && <Switch>
                     <LoggedInRoute exact path={'/admin/login'} component={Login}/>
                     <LoggedOutRoute path={'/admin'} component={AdminWindow}/>
-                    <Route path={'/'} component={MainPage}/>
+                    <Route path={'/'} component={UserPage}/>
                     <Route path={'*'} component={NotFound}/>
                 </Switch>}
             </ScrollToTop>

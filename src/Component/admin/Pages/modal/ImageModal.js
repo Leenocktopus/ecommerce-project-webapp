@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import Modal from "react-modal";
-import plus_image from "../../../../css/images/61183.png";
+import plus_image from "../../../../styles/images/61183.png";
 import {axiosAPI} from "../../../util/axiosConfig";
 
 const ImageModal = ({isOpen, close, currentProduct, ...otherProps}) => {
