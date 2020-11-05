@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {axiosAPI} from "../../util/axiosConfig";
 import OrderModal from "./modal/OrdersModal";
+import Order from "./entity/Order";
+import PageControl from "./PageControl";
 
 
 const Orders = () => {
@@ -47,17 +49,17 @@ const Orders = () => {
     }
 
     return (
-        <div className={"admin-control-main-grid"}>
+        <div className={"admin-window-main-grid"}>
             {order && <OrderModal isOpen={isModalOpen}
                                   close={() => setModalOpen(false)}
                                   order={order}/>}
             <div/>
-            <div className={"admin-control-search"}>
+            <div className={"right-top-grid"}>
                 <input type={"text"} className={"admin-control-input"} value={search}
                        onChange={e => setSearch(e.target.value)}/>
-                <button className={"admin-control-button"} onClick={startSearch}>Search</button>
+                <button className={"admin-button"} onClick={startSearch}>Search</button>
             </div>
-            <table className={"control-table"}>
+            <table className={"entity-table"}>
                 <thead>
                 <tr>
                     <th>id</th>
@@ -71,36 +73,14 @@ const Orders = () => {
                 </thead>
                 <tbody>
                 {orders &&
-                orders._embedded && orders._embedded.orderModelList.map(item => (
-                    <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.customerName}</td>
-                        <td>{item.customerPhone}</td>
-                        <td>{item.customerEmail}</td>
-                        <td>{new Date(item.date).toLocaleString("en-US")}</td>
-                        <td>
-                            <select value={item.orderStatus} onChange={(e) => changeStatus(item.id, e.target.value)}>
-                                <option className={"admin-order-status-pending"}>PENDING</option>
-                                <option className={"admin-order-status-completed"}>COMPLETED</option>
-                                <option className={"admin-order-status-cancelled"}>CANCELLED</option>
-                            </select>
-                        </td>
-                        <td>
-                            <button className={"icon-button"} onClick={() => openModalWithOrder(item.id)}><i
-                                className="fa fa-search"/></button>
-                        </td>
-                    </tr>
-                ))}
+                orders._embedded && <Order orders={orders._embedded.orderModelList}
+                                           openModalWithOrder={openModalWithOrder}
+                                           changeStatus={changeStatus}
+                />}
                 </tbody>
             </table>
 
-            <button className={"admin-control-button admin-prev-button"} style={{justifySelf: "right"}}
-                    onClick={() => setCurrentLink(links.prev)} disabled={links.prev === null}>Previous
-            </button>
-            <button className={"admin-control-button admin-next-button"} style={{justifySelf: "left"}}
-                    onClick={() => setCurrentLink(links.next)} disabled={links.next === null}>Next
-            </button>
-
+            <PageControl links={links} setCurrentLink={setCurrentLink}/>
         </div>
     );
 

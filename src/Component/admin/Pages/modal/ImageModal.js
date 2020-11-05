@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import Modal from "react-modal";
-import plus_image from "../../../../css/61183.png";
+import plus_image from "../../../../css/images/61183.png";
 import {axiosAPI} from "../../../util/axiosConfig";
 
 const ImageModal = ({isOpen, close, currentProduct, ...otherProps}) => {
@@ -80,11 +80,11 @@ const ImageModal = ({isOpen, close, currentProduct, ...otherProps}) => {
                                 <button className={"image-modal-delete-button"} onClick={() => removeImage(item.id)}><i
                                     className="fa fa-times"/></button>
                                 <img
-                                     className={"image-modal-secondary-image"}
-                                     src={'filename' in item ? `http://localhost:8080/images/${product}/${item.filename}` :
-                                         item.image}
-                                     alt={`image ${index}`}
-                                     onClick={() => setMainImage(images[index])}
+                                    className={"image-modal-secondary-image"}
+                                    src={'filename' in item ? `http://localhost:8080/images/${product}/${item.filename}` :
+                                        item.image}
+                                    alt={`image ${index}`}
+                                    onClick={() => setMainImage(images[index])}
                                 />
                             </div>
 
@@ -100,8 +100,8 @@ const ImageModal = ({isOpen, close, currentProduct, ...otherProps}) => {
                              src={plus_image}/>
                     </button>
                 </div>
-                <button className={"admin-control-button left-bottom-grid"} onClick={close}>Close</button>
-                <button className={"admin-control-button right-bottom-grid"} onClick={saveImages}>Save</button>
+                <button className={"admin-button left-bottom-grid"} onClick={close}>Close</button>
+                <button className={"admin-button right-bottom-grid"} onClick={saveImages}>Save</button>
             </div>
 
         </Modal>

@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, Switch} from "react-router-dom";
 import Categories from "./Pages/Categories";
 import Manufacturers from "./Pages/Manufacturers";
-import "../../css/admin-panel.css";
 import AdminMenu from "./AdminMenu";
 import Products from "./Pages/Products";
 import Orders from "./Pages/Orders";

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {axiosAPI} from "../../util/axiosConfig";
-import "../../../css/categories-window.css";
 import CategoriesModal from "./modal/CategoryModal";
+import Category from "./entity/Category";
 
 const Categories = () => {
     const defaultCategory = {id: "", name: ""}
@@ -37,20 +37,20 @@ const Categories = () => {
     }
 
     return (
-        <div className={"admin-control-main-grid"}>
+        <div className={"admin-window-main-grid"}>
             {<CategoriesModal isOpen={isModalOpen}
                               close={closeModal}
                               currentCategory={currentCategory}
                               reload={reload}/>
             }
-            <button className={"admin-control-button"} style={{justifySelf: "left"}}
+            <button className={"admin-button left-top-grid"}
                     onClick={() => setModalOpen(true)}>Add new...
             </button>
             <div/>
 
-            {error ? <div className={"delete-error"}>{error}</div> : <div>&nbsp;</div>}
+            {error ? <div className={"admin-div-error"}>{error}</div> : <div>&nbsp;</div>}
 
-            <table className={"control-table"}>
+            <table className={"entity-table"}>
                 <thead>
                 <tr>
                     <th>id</th>
@@ -59,18 +59,7 @@ const Categories = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {categories && categories.map(item =>
-                    <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>{item.name}</td>
-                        <td>
-                            <button className={"icon-button"}><i className="fa fa-edit"
-                                                                 onClick={() => openModal(item.id)}/></button>
-                            <button className={"icon-button"}><i className="fa fa-trash"
-                                                                 onClick={() => remove(item.id)}/></button>
-                        </td>
-                    </tr>)}
-
+                {categories && <Category categories={categories} openModal={openModal} remove={remove}/>}
                 </tbody>
             </table>
         </div>

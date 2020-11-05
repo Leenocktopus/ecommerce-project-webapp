@@ -53,7 +53,7 @@ const ProductModal = (props) => {
             axiosAPI.post(url, obj).then((res) => saveAttributes(res.data.id)).then(() => closeModal())
         }
     }
-    const saveAttributes = (id) =>{
+    const saveAttributes = (id) => {
 
         const attrIds = attr.map(item => item.id)
         const attributesIds = attributes.map(item => item.id)
@@ -88,11 +88,11 @@ const ProductModal = (props) => {
             }
         }}
                appElement={document.getElementById('root')} isOpen={isOpen} /*onRequestClose={close}*/>
-            <div className={"control-modal"}>
+            <div className={"modal-container"}>
                 <h2>{currentProduct.id ? currentProduct.id : "New item"} <small><i
                     className="fa fa-pencil fa-10x"/></small></h2>
-                <div className={"control-modal-grid"}>
-                    <table className={"control-modal-table"}>
+                <div className={"modal-grid"}>
+                    <table className={"modal-table"}>
                         <thead>
                         </thead>
                         <tbody>
@@ -137,11 +137,11 @@ const ProductModal = (props) => {
                         </tr>
                         </tbody>
                     </table>
-                    <div className={"control-modal-description"}>
+                    <div className={"modal-description"}>
                         <div>Description:</div>
                         <textarea value={description} onChange={e => setDescription(e.target.value)}/>
                     </div>
-                    <div className={"control-modal-attributes"}>
+                    <div className={"admin-product-modal-attributes"}>
                         <table className={"attributes-table"}>
                             <thead>
                             <tr>
@@ -170,9 +170,11 @@ const ProductModal = (props) => {
                                                    } : x))
                                                }}/></td>
                                     <td>
-                                        <button className={"icon-button remove-attribute"}
-                                                onClick={() => {setAttributes(
-                                                    currentAttr => currentAttr.filter(x => x.id !== item.id))}}>
+                                        <button className={"admin-icon-button remove-attribute"}
+                                                onClick={() => {
+                                                    setAttributes(
+                                                        currentAttr => currentAttr.filter(x => x.id !== item.id))
+                                                }}>
                                             {"\u2716"}
                                         </button>
                                     </td>
@@ -180,17 +182,20 @@ const ProductModal = (props) => {
                             )}
                             </tbody>
                         </table>
-                        <button className={"admin-control-button left-bottom-grid"}
-                                onClick={() => {setAttributes(currentAttr => [...currentAttr, {
-                            id: (Math.random() / Math.random()) / Date.now(),
-                            name: "",
-                            value: ""
-                        }])}}>Add new..</button>
+                        <button className={"admin-button left-bottom-grid"}
+                                onClick={() => {
+                                    setAttributes(currentAttr => [...currentAttr, {
+                                        id: (Math.random() / Math.random()) / Date.now(),
+                                        name: "",
+                                        value: ""
+                                    }])
+                                }}>Add new..
+                        </button>
                     </div>
 
 
-                    <button className={"admin-control-button left-bottom-grid"} onClick={closeModal}>Close</button>
-                    <button className={"admin-control-button right-bottom-grid"} onClick={save}>Save</button>
+                    <button className={"admin-button left-bottom-grid"} onClick={closeModal}>Close</button>
+                    <button className={"admin-button right-bottom-grid"} onClick={save}>Save</button>
                 </div>
             </div>
 

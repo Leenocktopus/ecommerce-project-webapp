@@ -1,30 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import ScrollToTop from "./Component/util/ScrollToTop";
-
-import AdminWindow from "./Component/admin/AdminWindow";
-import "./css/global.css";
-import Login from "./Component/admin/Pages/Login";
-
 import {axiosSecurity} from "./Component/util/axiosConfig";
 import {connect} from "react-redux";
 import {setAccessToken} from "./Component/redux/actions/tokenActions";
+
+import ScrollToTop from "./Component/util/ScrollToTop";
 import NotFound from "./Component/admin/Pages/NotFound";
 import MainPage from "./Component/user/MainPage";
 import LoggedOutRoute from "./Component/admin/LoggedOutRoute";
 import LoggedInRoute from "./Component/admin/LoggedInRoute";
+import AdminWindow from "./Component/admin/AdminWindow";
+import Login from "./Component/admin/Pages/Login";
+
+import "./css/admin/global.css";
+import "./css/admin/admin-window.css";
+import "./css/admin/menu.css";
+import "./css/admin/not-found.css";
+import "./css/admin/login-window.css";
+import "./css/admin/settings-window.css"
+import "./css/admin/modal.css"
+import "./css/admin/image-modal.css"
+import "./css/admin/page-specific.css"
+
 
 const App = ({setAccessToken, ...otherProps}) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-            axiosSecurity.get("/refresh")
-                .then(response => response.data.token)
-                .then(token => setAccessToken(token))
-                .then(() => setLoading(false))
-                .catch(() => setLoading(false))
-        }
-        , [setAccessToken])
+        axiosSecurity.get("/refresh")
+            .then(response => response.data.token)
+            .then(token => setAccessToken(token))
+            .then(() => setLoading(false))
+            .catch(() => setLoading(false))
+    }, [setAccessToken])
 
     return (
         <Router>

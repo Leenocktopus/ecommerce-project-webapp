@@ -31,11 +31,11 @@ const CategoriesModal = (props) => {
             }
         }}
                appElement={document.getElementById('root')} isOpen={isOpen}>
-            <div className={"control-modal"}>
+            <div className={"modal-container"}>
                 <h2>{currentCategory.id ? currentCategory.id : "New item"} <small><i
                     className="fa fa-pencil fa-10x"/></small></h2>
-                <div className={"control-modal-grid"}>
-                    <table className={"control-modal-table"}>
+                <div className={"modal-grid"}>
+                    <table className={"modal-table"}>
                         <thead>
                         </thead>
                         <tbody>
@@ -49,8 +49,8 @@ const CategoriesModal = (props) => {
                         </tbody>
                     </table>
                     <div/>
-                    <button className={"admin-control-button left-bottom-grid"} onClick={close}>Close</button>
-                    <button className={"admin-control-button right-bottom-grid"} onClick={save}>Save</button>
+                    <button className={"admin-button left-bottom-grid"} onClick={close}>Close</button>
+                    <button className={"admin-button right-bottom-grid"} onClick={save}>Save</button>
                 </div>
             </div>
 

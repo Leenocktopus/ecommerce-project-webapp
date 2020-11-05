@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
-import not_found from "../../../../css/not_found.png"
+import not_found from "../../../../css/images/not_found.png"
 
 const OrderModal = (props) => {
     const {isOpen, close, order} = props;
@@ -17,7 +17,7 @@ const OrderModal = (props) => {
             }
         }}
                appElement={document.getElementById('root')} isOpen={isOpen} /*onRequestClose={close}*/>
-            <div className={"control-modal"}>
+            <div className={"modal-container"}>
                 <h2>{`Order №${order.id}`}</h2>
                 <div>
                     {order.products.map(item =>
@@ -33,7 +33,7 @@ const OrderModal = (props) => {
                         <b>Total: </b> {order.products.map(item => item.quantity * item.product.price).reduce((x, y) => x + y, 0)}$
                     </div>
                     <div className={"admin-order-cancel"}>
-                        <button className={"admin-control-button"} onClick={close}>Close</button>
+                        <button className={"admin-button"} onClick={close}>Close</button>
                     </div>
 
                 </div>

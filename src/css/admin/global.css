@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, SansSerif, serif;
+}
+
+body {
+    background-color: whitesmoke;
+}
+/* Grid alignment auxiliary classes*/
+.left-bottom-grid {
+    justify-self: left;
+    align-self: end;
+}
+
+.right-bottom-grid {
+    justify-self: right;
+    align-self: end;
+}
+.right-top-grid {
+    justify-self: right;
+    align-self: start;
+}
+.left-top-grid {
+    justify-self: left;
+    align-self: start;
+}

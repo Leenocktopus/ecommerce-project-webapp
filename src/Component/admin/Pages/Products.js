@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {axiosAPI} from "../../util/axiosConfig";
-import "../../../css/categories-window.css";
 import ProductModal from "./modal/ProductModal";
 import ImageModal from "./modal/ImageModal";
-import not_found from "../../../css/not_found.png";
+import Product from "./entity/Product";
+import PageControl from "./PageControl";
 
 const Products = () => {
     const defaultProduct = {
@@ -65,9 +65,11 @@ const Products = () => {
     const openProductModalWithProduct = (id) => {
         setCurrentProduct(products._embedded.productModelList.find(item => item.id === id))
         axiosAPI.get(`/products/${id}/attributes`)
-            .then(res => {if(res.data._embedded){
-            setAttributes(res.data._embedded.productAttributeModelList)
-        }})
+            .then(res => {
+                if (res.data._embedded) {
+                    setAttributes(res.data._embedded.productAttributeModelList)
+                }
+            })
         openProductModal()
     }
 
@@ -93,7 +95,7 @@ const Products = () => {
 
     }
     return (
-        <div className={"admin-control-main-grid"}>
+        <div className={"admin-window-main-grid"}>
             {(manufacturers && categories) &&
             <ProductModal isOpen={isProductModalOpen}
                           close={closeModal}
@@ -106,15 +108,15 @@ const Products = () => {
                          close={closeModal}
                          currentProduct={currentProduct}/>
             }
-            <button className={"admin-control-button"} style={{justifySelf: "left"}}
+            <button className={"admin-button left-top-grid"}
                     onClick={() => openProductModal()}>Add new...
             </button>
-            <div className={"admin-control-search"}>
+            <div className={"right-top-grid"}>
                 <input type={"text"} className={"admin-control-input"} value={search}
                        onChange={e => setSearch(e.target.value)}/>
-                <button className={"admin-control-button"} onClick={startSearch}>Search</button>
+                <button className={"admin-button"} onClick={startSearch}>Search</button>
             </div>
-            <table className={"control-table"}>
+            <table className={"entity-table"}>
                 <thead>
                 <tr>
                     <th>id</th>
@@ -131,40 +133,15 @@ const Products = () => {
                 </thead>
                 <tbody>
                 {products && products._embedded &&
-                products._embedded.productModelList.map(item => (
-                    <tr key={item.id}>
-                        <td>{item.id}</td>
-                        <td>
-                            <img className={"admin-control-image"}
-                                 alt={`product`}
-                                 src={item.images.length > 0 ? `http://localhost:8080/images/${item.id}/${item.images[0].filename}` : not_found}/>
-                        </td>
-                        <td>{item.name}</td>
-                        <td>{item.manufacturer.name}</td>
-                        <td>{item.category.name}</td>
-                        <td>{item.price}</td>
-                        <td>{item.amountInStock}</td>
-                        <td>{item.popularity}</td>
-                        <td>{item.totalScore}</td>
-                        <td>
-                            <button className={"icon-button"} onClick={() => openProductModalWithProduct(item.id)}><i
-                                className="fa fa-edit"/></button>
-                            <button className={"icon-button"} onClick={() => openImageModalWithProduct(item.id)}><i
-                                className="fa fa-picture-o"/></button>
-                            <button className={"icon-button"}><i className="fa fa-trash"
-                                                                 onClick={() => remove(item.id)}/></button>
-                        </td>
-                    </tr>
-                ))}
+                <Product products={products._embedded.productModelList}
+                         openProductModalWithProduct={openProductModalWithProduct}
+                         openImageModalWithProduct={openImageModalWithProduct}
+                         remove={remove}
+                />}
                 </tbody>
             </table>
 
-            <button className={"admin-control-button admin-prev-button"} style={{justifySelf: "right"}}
-                    onClick={() => setCurrentLink(links.prev)} disabled={links.prev === null}>Previous
-            </button>
-            <button className={"admin-control-button admin-next-button"} style={{justifySelf: "left"}}
-                    onClick={() => setCurrentLink(links.next)} disabled={links.next === null}>Next
-            </button>
+            <PageControl links={links} setCurrentLink={setCurrentLink}/>
 
         </div>
     );

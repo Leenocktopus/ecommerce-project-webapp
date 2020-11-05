@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {setUser} from "../../redux/actions/userActions";
 import {connect} from "react-redux";
-import "../../../css/settings-window.css";
 import {axiosSecurity} from "../../util/axiosConfig";
 import jwtDecode from "jwt-decode";
 import {setAccessToken} from "../../redux/actions/tokenActions";
