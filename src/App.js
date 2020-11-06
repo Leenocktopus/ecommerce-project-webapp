@@ -11,6 +11,7 @@ import LoggedInRoute from "./Component/admin/LoggedInRoute";
 import AdminWindow from "./Component/admin/AdminWindow";
 import Login from "./Component/admin/Pages/Login";
 import UserPage from "./Component/user/UserPage";
+import Loading from "./Component/util/Loading";
 
 import "./styles/admin/global.css";
 import "./styles/admin/admin-window.css";
@@ -21,8 +22,14 @@ import "./styles/admin/settings-window.css"
 import "./styles/admin/modal.css"
 import "./styles/admin/image-modal.css"
 import "./styles/admin/page-specific.css"
+import "./styles/admin/loading.css"
 import "./styles/user/header.css"
 import "./styles/user/main-page.css"
+import "./styles/user/contacts.css"
+import "./styles/user/shop-page.css"
+import "./styles/user/product-card.css"
+import "./styles/user/star-rating.css"
+
 
 const App = ({setAccessToken, ...otherProps}) => {
     const [loading, setLoading] = useState(true);
@@ -38,12 +45,12 @@ const App = ({setAccessToken, ...otherProps}) => {
     return (
         <Router>
             <ScrollToTop>
-                {!loading && <Switch>
+                {!loading ? <Switch>
                     <LoggedInRoute exact path={'/admin/login'} component={Login}/>
                     <LoggedOutRoute path={'/admin'} component={AdminWindow}/>
                     <Route path={'/'} component={UserPage}/>
                     <Route path={'*'} component={NotFound}/>
-                </Switch>}
+                </Switch> : <Loading/>}
             </ScrollToTop>
         </Router>
     );
