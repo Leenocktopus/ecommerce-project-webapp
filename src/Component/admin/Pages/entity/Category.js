@@ -1,23 +1,17 @@
 import React from "react";
 
-const Category = (props) => {
-    const {categories, openModal, remove} = props;
+const Category = ({category, openModal, remove}) => {
     return (
-        <>
-            {categories.map(item =>
-                <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.name}</td>
-                    <td>
-                        <button className={"admin-icon-button"}><i className="fa fa-edit"
-                                                                   onClick={() => openModal(item.id)}/></button>
-                        <button className={"admin-icon-button"}><i className="fa fa-trash"
-                                                                   onClick={() => remove(item.id)}/></button>
-                    </td>
-                </tr>)}
-        </>
-
+        <tr key={category.id}>
+            <td>{category.id}</td>
+            <td>{category.name}</td>
+            <td>
+                <button className={"admin-icon-button"}><i className="fa fa-edit"
+                                                           onClick={() => openModal(category.id)}/></button>
+                <button className={"admin-icon-button"}><i className="fa fa-trash"
+                                                           onClick={() => remove(category.id)}/></button>
+            </td>
+        </tr>
     )
-
 }
 export default Category

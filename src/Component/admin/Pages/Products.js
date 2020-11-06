@@ -133,11 +133,13 @@ const Products = () => {
                 </thead>
                 <tbody>
                 {products && products._embedded &&
-                <Product products={products._embedded.productModelList}
-                         openProductModalWithProduct={openProductModalWithProduct}
-                         openImageModalWithProduct={openImageModalWithProduct}
-                         remove={remove}
-                />}
+                products._embedded.productModelList.map(item =>
+                    <Product product={item}
+                             openProductModalWithProduct={openProductModalWithProduct}
+                             openImageModalWithProduct={openImageModalWithProduct}
+                             remove={remove}
+                    />)
+                }
                 </tbody>
             </table>
 

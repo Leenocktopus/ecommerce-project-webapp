@@ -1,23 +1,18 @@
 import React from "react";
 
-const Manufacturer = (props) => {
-    const {manufacturers, openModal, remove} = props;
+const Manufacturer = ({manufacturer, openModal, remove}) => {
     return (
-        <>
-            {manufacturers.map(item =>
-            <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>
-                    <button className={"admin-icon-button"}><i className="fa fa-edit"
-                                                               onClick={() => openModal(item.id)}/></button>
-                    <button className={"admin-icon-button"}><i className="fa fa-trash"
-                                                               onClick={() => remove(item.id)}/></button>
-                </td>
-            </tr>)}
-        </>
 
+        <tr key={manufacturer.id}>
+            <td>{manufacturer.id}</td>
+            <td>{manufacturer.name}</td>
+            <td>
+                <button className={"admin-icon-button"}><i className="fa fa-edit"
+                                                           onClick={() => openModal(manufacturer.id)}/></button>
+                <button className={"admin-icon-button"}><i className="fa fa-trash"
+                                                           onClick={() => remove(manufacturer.id)}/></button>
+            </td>
+        </tr>
     )
-
 }
 export default Manufacturer

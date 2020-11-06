@@ -59,7 +59,10 @@ const Categories = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {categories && <Category categories={categories} openModal={openModal} remove={remove}/>}
+                {categories && categories.map(item =>
+                    <Category category={item}
+                              openModal={openModal}
+                              remove={remove}/>)}
                 </tbody>
             </table>
         </div>

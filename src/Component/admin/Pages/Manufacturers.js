@@ -58,8 +58,8 @@ const Manufacturers = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {manufacturers && <Manufacturer manufacturers={manufacturers} openModal={openModal} remove={remove}/>}
-
+                {manufacturers && manufacturers.map(item =>
+                    <Manufacturer manufacturer={item} openModal={openModal} remove={remove}/>)}
                 </tbody>
             </table>
         </div>

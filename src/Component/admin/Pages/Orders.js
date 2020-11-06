@@ -73,10 +73,10 @@ const Orders = () => {
                 </thead>
                 <tbody>
                 {orders &&
-                orders._embedded && <Order orders={orders._embedded.orderModelList}
+                orders._embedded && orders._embedded.orderModelList.map(item => <Order order={item}
                                            openModalWithOrder={openModalWithOrder}
                                            changeStatus={changeStatus}
-                />}
+                />)}
                 </tbody>
             </table>
 
