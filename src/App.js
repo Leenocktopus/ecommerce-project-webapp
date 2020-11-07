@@ -29,7 +29,7 @@ import "./styles/user/contacts.css"
 import "./styles/user/shop-page.css"
 import "./styles/user/product-card.css"
 import "./styles/user/star-rating.css"
-
+import "./styles/user/product-page.css"
 
 const App = ({setAccessToken, ...otherProps}) => {
     const [loading, setLoading] = useState(true);

@@ -1,7 +1,7 @@
 .nav-bar {
     display: grid;
-    grid-template-columns: 5fr repeat(3, 1fr);
-    background-color: #F0F0F0;
+    grid-template-columns: 5fr repeat(4, 1fr);
+    background-color: #97CAEF;
     padding: 10px 60px;
 
 }
@@ -23,5 +23,6 @@
 
 .nav-bar-logo {
     font-size: 20pt;
+    color: #190061;
     margin: 0 0 0 40px
 }

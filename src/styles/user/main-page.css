@@ -1,7 +1,7 @@
 #promo-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: 65%;
+    width: 925px;
     grid-gap: 10px;
     margin: 15px auto auto auto;
 }
@@ -29,7 +29,7 @@
 #promo-three {
     grid-column: 1/3;
     height: 300px;
-    width: 925px;
+    width: 923px;
     background-image: url("../images/promo3.png");
     background-position: calc(100% + 40px) calc(100% + 80px);
     box-shadow: inset 0px 0px 277px 20px #4c3f37;

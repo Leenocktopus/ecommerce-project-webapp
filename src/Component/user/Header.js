@@ -1,18 +1,25 @@
-import React, {Component} from "react";
+import React from "react";
 import {NavLink} from "react-router-dom";
+import {connect} from "react-redux";
 
 
-class Header extends Component {
-    render() {
-        return (
-            <div className={"nav-bar"}>
-                <div className={"nav-bar-logo"}>eShop</div>
-                <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact to={"/"}>Home</NavLink></div>
-                <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact to={"/products"}>Shop</NavLink></div>
-                <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact to={"/contacts"}>Contacts</NavLink></div>
-            </div>
-        );
-    }
+const Header = ({cart}) => {
+    return (
+        <div className={"nav-bar"}>
+            <div className={"nav-bar-logo"}>eShop</div>
+            <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact
+                                                     to={"/"}>HOME</NavLink></div>
+            <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact
+                                                     to={"/shop"}>SHOP</NavLink></div>
+            <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact
+                                                     to={"/contacts"}>CONTACTS</NavLink></div>
+            <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact
+                                                     to={"/cart"}>CART ({cart.length})</NavLink></div>
+        </div>)
 }
-
-export default Header
+const mapStateToProps = state => {
+    return {
+        cart: state.cartState.cartItems
+    };
+};
+export default connect(mapStateToProps, null)(Header)
