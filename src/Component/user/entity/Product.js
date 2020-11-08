@@ -6,6 +6,7 @@ const Product = ({product}) => {
     const startStyle = {
         width: `${100 * product.totalScore / 5}%`
     }
+
     return (
         <div className={"product-card"}>
             <Link to={`/product/${product.id}`} className={"product-card-link"}>

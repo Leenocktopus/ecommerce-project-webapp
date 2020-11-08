@@ -3,24 +3,23 @@ import not_found from "./../../styles/images/not_found.png"
 import {axiosAPI} from "../util/axiosConfig";
 import Loading from "../util/Loading";
 
-const Slider = ({id}) => {
+const Slider = ({url}) => {
     const [images, setImages] = useState()
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
-        axiosAPI.get(`/products/${id}/images`).then(res => setImages(res.data))
+        axiosAPI.get(url).then(res => setImages(res.data))
 
     }, [])
     return (
         <div>
+            <button id={"left-button"}/>
             {images ? <img className={"product-card-image"}
                            alt={"product"}
                            src={images._embedded && images._embedded.imageModelList.length > 0 ?
-                               `http://localhost:8080/images/${id}/${images._embedded.imageModelList[index].filename}` :
+                               images._embedded.imageModelList[index]._links.static.href :
                                not_found}/>
                 : <Loading/>}
-            <button id={"left-button"}/>
-            <img/>
             <button id={"right-button"}/>
         </div>
     );
