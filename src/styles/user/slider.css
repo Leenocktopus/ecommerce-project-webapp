@@ -1,0 +1,31 @@
+#slider{
+    margin: 0 0 0 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#right-button, #left-button{
+    border: none;
+    background: none;
+    font-size: 64pt;
+    outline: none;
+}
+
+#right-button:disabled, #left-button:disabled{
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+}
+
+/*#left-button{
+    transform: translate(0, +140%);
+}
+
+#right-button{
+    transform: translate(-90%, +140%);
+}*/
+
+#slider-image{
+    height: 500px;
+    width: 500px;
+    object-fit: scale-down;
+    padding: 10px;
+}

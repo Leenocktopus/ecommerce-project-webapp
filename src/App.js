@@ -30,7 +30,9 @@ import "./styles/user/shop-page.css"
 import "./styles/user/product-card.css"
 import "./styles/user/star-rating.css"
 import "./styles/user/product-page.css"
-
+import "./styles/user/slider.css"
+import "./styles/user/comment-section.css"
+import "./styles/user/attribute-section.css"
 const App = ({setAccessToken, ...otherProps}) => {
     const [loading, setLoading] = useState(true);
 

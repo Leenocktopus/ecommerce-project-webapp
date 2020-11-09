@@ -1,0 +1,21 @@
+#product-attributes-container{
+    padding: 20px;
+    align-self: start;
+}
+
+#product-attributes-table {
+    border-collapse: collapse;
+}
+#product-attributes-table td {
+    padding: 5px 10px 5px 0;
+}
+.attr-name{
+    font-weight: bolder;
+}
+
+#product-attributes-table tr{
+    width: 100%;
+    border-bottom: 1px solid #666666;
+}
+
+

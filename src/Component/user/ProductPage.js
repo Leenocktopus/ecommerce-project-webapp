@@ -13,26 +13,34 @@ const ProductPage = ({match}) => {
     }, [])
 
 
-
     const startStyle = {
-        width: `${100 * product ? product.totalScore : null / 5}%`
+        width: `${100 * (product ? product.totalScore : null) / 5}%`
     }
 
     return (
-        <div id={"product=page-container"}>
+        <div id={"product-page-container"}>
             {product ? <>
                     <div id={"product-info-grid"}>
                         <Slider url={product._links.images.href}/>
-                        <div className={"product-name"}>{product.name}</div>
-                        <div className="star-rating comment">
-                            <i style={startStyle}/>
+                        <div id={"product-text-info"}>
+                            <div id={"product-name"}>{product.name}</div>
+                            <div className="star-rating comment">
+                                <i style={startStyle}/>
+                            </div>
+                            <div id={"product-price"}>{product.price}$</div>
+
+                            <button id={"product-card-buy"} disabled={product.amountInStock === 0}>Add to cart</button>
+                            {product.amountInStock === 0 && <span id={"out-of-stock"}>Out of stock</span>}
+                            <div id={"product-description"}>Description:
+                                <p>{product.descr}</p>
+                            </div>
                         </div>
-                        <div className={"product-price"}>{product.price}$</div>
-                        {product.amountInStock === 0 ? <span className={"out-of-stock"}>Out of stock</span> :
-                            <button className={"product-card-buy"}>Buy now</button>}
+                        <hr/>
                     </div>
-                    <AttributesSection url={product._links.attributes.href}/>
-                    <Comments url={product._links.comments.href}/>
+                    <div id={"additional-info-grid"}>
+                        <AttributesSection url={product._links.attributes.href}/>
+                        <Comments url={product._links.comments.href}/>
+                    </div>
                 </>
                 : <Loading/>
             }
