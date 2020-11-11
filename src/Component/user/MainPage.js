@@ -1,8 +1,13 @@
 import React from "react";
 
-const MainPage = () => {
+const MainPage = ({location}) => {
     return (
         <div id={"main-page-container"}>
+            {location.redirect &&
+            <div id={"thank-you"}>
+                <h3>Thanks for purchase!</h3>
+                <div>Our operator will contact you as soon as possible.</div>
+            </div>}
             <div id={"promo-container"}>
                 <div id={"promo-one"}>
                     <div className={"promo-text"}>

@@ -4,8 +4,10 @@ import Loading from "../util/Loading";
 import Comments from "./CommentSection";
 import Slider from "./Slider";
 import AttributesSection from "./AttributesSection";
+import {addToCart} from "../redux/actions/cartActions";
+import {connect} from "react-redux";
 
-const ProductPage = ({match}) => {
+const ProductPage = ({match, addToCart}) => {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
@@ -29,7 +31,14 @@ const ProductPage = ({match}) => {
                             </div>
                             <div id={"product-price"}>{product.price}$</div>
 
-                            <button id={"product-card-buy"} disabled={product.amountInStock === 0}>Add to cart</button>
+                            <button id={"product-card-buy"} disabled={product.amountInStock === 0}
+                                    onClick={() => addToCart({
+                                        "prod_id": product.id,
+                                        "name": product.name,
+                                        "price": product.price,
+                                        "img": product.images.length > 0 ? `http://localhost:8080/images/${product.id}/${product.images[0].filename}` : ""
+                                    })}>Add to cart
+                            </button>
                             {product.amountInStock === 0 && <span id={"out-of-stock"}>Out of stock</span>}
                             <div id={"product-description"}>Description:
                                 <p>{product.descr}</p>
@@ -50,4 +59,4 @@ const ProductPage = ({match}) => {
 
 }
 
-export default ProductPage
+export default connect(null, {addToCart})(ProductPage)

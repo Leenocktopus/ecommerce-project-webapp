@@ -14,12 +14,12 @@ const Header = ({cart}) => {
             <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact
                                                      to={"/contacts"}>CONTACTS</NavLink></div>
             <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact
-                                                     to={"/cart"}>CART ({cart.length})</NavLink></div>
+                                                     to={"/cart"}>CART ({cart.cartItems.length})</NavLink></div>
         </div>)
 }
 const mapStateToProps = state => {
     return {
-        cart: state.cartState.cartItems
+        cart: state.cartState
     };
 };
 export default connect(mapStateToProps, null)(Header)

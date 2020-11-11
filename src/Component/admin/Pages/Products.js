@@ -3,7 +3,7 @@ import {axiosAPI} from "../../util/axiosConfig";
 import ProductModal from "./modal/ProductModal";
 import ImageModal from "./modal/ImageModal";
 import Product from "./entity/Product";
-import PageControl from "./PageControl";
+import PageControl from "../../util/PageControl";
 
 const Products = () => {
     const defaultProduct = {

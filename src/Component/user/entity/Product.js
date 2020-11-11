@@ -1,8 +1,10 @@
 import React from "react";
 import not_found from "../../../styles/images/not_found.png";
 import {Link} from "react-router-dom";
+import {addToCart} from "../../redux/actions/cartActions";
+import {connect} from "react-redux";
 
-const Product = ({product}) => {
+const Product = ({product, addToCart}) => {
     const startStyle = {
         width: `${100 * product.totalScore / 5}%`
     }
@@ -23,8 +25,13 @@ const Product = ({product}) => {
             <div className={"product-price"}>{product.price}$</div>
 
             {product.amountInStock === 0 ? <span className={"out-of-stock"}>Out of stock</span> :
-                <button className={"product-card-buy"}>Buy now</button>}
+                <button className={"product-card-buy"} onClick={() => addToCart({
+                    "prod_id": product.id,
+                    "name": product.name,
+                    "price": product.price,
+                    "img": product.images.length > 0 ? `http://localhost:8080/images/${product.id}/${product.images[0].filename}` : ""
+                })}>Buy now</button>}
         </div>
     )
 }
-export default Product
+export default connect(null, {addToCart})(Product)

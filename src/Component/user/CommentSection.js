@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {axiosAPI} from "../util/axiosConfig";
 import Loading from "../util/Loading";
-import PageControl from "../admin/Pages/PageControl";
+import PageControl from "../util/PageControl";
 
 
 const Comments = ({url}) => {

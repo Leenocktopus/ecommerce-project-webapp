@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {axiosAPI} from "../../util/axiosConfig";
 import OrderModal from "./modal/OrdersModal";
 import Order from "./entity/Order";
-import PageControl from "./PageControl";
+import PageControl from "../../util/PageControl";
 
 
 const Orders = () => {

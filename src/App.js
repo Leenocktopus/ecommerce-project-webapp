@@ -33,6 +33,8 @@ import "./styles/user/product-page.css"
 import "./styles/user/slider.css"
 import "./styles/user/comment-section.css"
 import "./styles/user/attribute-section.css"
+import "./styles/user/cart-page.css"
+
 const App = ({setAccessToken, ...otherProps}) => {
     const [loading, setLoading] = useState(true);
 

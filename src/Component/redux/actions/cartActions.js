@@ -1,4 +1,4 @@
-import {ADD_TO_CART, DELETE_ALL, GET_CART_ITEMS, REMOVE_FROM_CART, SET_ITEMS_VALUE} from "../types";
+import {ADD_TO_CART, DELETE_ALL, GET_CART_ITEMS, REMOVE_FROM_CART, SET_QUANTITY} from "../types";
 
 export const addToCart = (val) => {
     return (dispatch) => {
@@ -23,10 +23,10 @@ export const getCartItems = () => {
         });
     };
 };
-export const setItems = (val) => {
+export const setQuantity = (val) => {
     return (dispatch) => {
         dispatch({
-            type: SET_ITEMS_VALUE,
+            type: SET_QUANTITY,
             value: val
         });
     };
