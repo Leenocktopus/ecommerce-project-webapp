@@ -71,7 +71,7 @@ const CartPage = ({cart, removeFromCart, setQuantity, deleteAll, history}) => {
                             <tr key={item.product.prod_id}>
                                 <td>{item.product.name}</td>
                                 <td><img src={item.product.img ? item.product.img : not_found}/></td>
-                                <td>{item.product.price}$</td>
+                                <td>{(item.product.price).toLocaleString()}$</td>
                                 <td className={"quantity-cell"}>
                                     <button className={"button-plus"} onClick={() => setQuantity({
                                         prod_id: item.product.prod_id,

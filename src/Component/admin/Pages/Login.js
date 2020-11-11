@@ -27,8 +27,15 @@ const Login = ({setUser, setAccessToken, history, ...otherProps}) => {
             .catch(() => setFailed(true));
 
     }
+
+    const keyListener = (e) => {
+        if (e.key === 'Enter'){
+            login()
+        }
+    }
+
     return (
-        <div id={"login-wrapper"}>
+        <div id={"login-wrapper"} onKeyPress={(e) => keyListener(e)}>
             <div id={"login-form"}>
                 <div id="login-header">
                     Sign in

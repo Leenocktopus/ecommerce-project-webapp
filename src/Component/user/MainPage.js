@@ -1,6 +1,6 @@
 import React from "react";
 
-const MainPage = ({location}) => {
+const MainPage = ({location, history}) => {
     return (
         <div id={"main-page-container"}>
             {location.redirect &&
@@ -12,21 +12,21 @@ const MainPage = ({location}) => {
                 <div id={"promo-one"}>
                     <div className={"promo-text"}>
                         <div className={"promo-name"}>Google Pixel 5</div>
-                        <button className={"shop-now-button"}>Shop now <span
+                        <button className={"shop-now-button"} onClick={() => history.push("/product/998621")}>Shop now <span
                             className={"shop-now-arrow"}>&raquo;</span></button>
                     </div>
                 </div>
                 <div id={"promo-two"}>
                     <div className={"promo-text"}>
                         <div className={"promo-name"}>Dell XPS 15</div>
-                        <button className={"shop-now-button"}>Shop now <span
+                        <button className={"shop-now-button"} onClick={() => history.push("/product/998638")}>Shop now <span
                             className={"shop-now-arrow"}>&raquo;</span></button>
                     </div>
                 </div>
                 <div id={"promo-three"}>
                     <div className={"promo-text"}>
                         <div className={"promo-name"}>Sony Playstation 5</div>
-                        <button className={"shop-now-button"}>Shop now <span
+                        <button className={"shop-now-button"} onClick={() => history.push("/product/998634")}>Shop now <span
                             className={"shop-now-arrow"}>&raquo;</span></button>
                     </div>
                 </div>

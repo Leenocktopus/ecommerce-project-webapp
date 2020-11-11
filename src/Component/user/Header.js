@@ -14,7 +14,7 @@ const Header = ({cart}) => {
             <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact
                                                      to={"/contacts"}>CONTACTS</NavLink></div>
             <div className={"nav-bar-item"}><NavLink activeClassName={"nav-bar-item-active"} exact
-                                                     to={"/cart"}>CART ({cart.cartItems.length})</NavLink></div>
+                                                     to={"/cart"}>CART&nbsp;({cart.cartItems.length})</NavLink></div>
         </div>)
 }
 const mapStateToProps = state => {

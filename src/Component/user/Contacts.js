@@ -41,18 +41,20 @@ const Contacts = () => {
             <Location/>
             <div id={"about-us"}>
                 <div>ABOUT US</div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci atque beatae culpa deserunt
-                    doloribus, eveniet exercitationem facilis harum iure labore magnam magni obcaecati perspiciatis
-                    quis recusandae soluta voluptas voluptates?
-                    temporibus?</p>
-                <p>A ad adipisci aperiam aspernatur aut consequuntur
-                    cupiditate debitis deserunt distinctio doloribus eaque explicabo fuga fugiat illum incidunt
-                    ipsam itaque iusto labore magnam magni maiores, molestias nemo nulla odio optio quaerat qui quia
-                    quibusdam quis, rerum, similique sint sit suscipit tenetur ullam vel vitae! </p>
-                <p>Aliquam distinctio
-                    eos error esse excepturi, fugit ipsum itaque iusto maiores natus non pariatur quibusdam
-                    repellendus tempore veniam? Atque dolores eveniet minima optio perspiciatis praesentium
-                    tempora</p>
+                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. At autem consequuntur, distinctio
+                    doloribus est hic in ipsum itaque, laboriosam laudantium libero modi officia quod rem repellat. </p>
+                <p> Amet at atque
+                    consectetur, dolor doloribus dolorum eum exercitationem explicabo fuga fugit magni maxime modi nam,
+                    natus, nisi odio perspiciatis possimus provident quaerat quia quisquam repellendus reprehenderit
+                    sint totam veniam voluptate voluptates. Ad aut cumque distinctio est eum illo, impedit ipsa labore,
+                    maiores nihil nobis, odit repellendus reprehenderit sequi soluta. </p>
+                <p> At explicabo natus unde. Aperiam in inventore numquam porro sapiente? Dolor iusto numquam
+                    repellendus? Atque consectetur cumque delectus dolor fugiat hic incidunt laboriosam, magnam maxime
+                    minima non nulla numquam quod suscipit, tenetur, velit voluptatibus. Architecto asperiores at
+                    cupiditate dolor, dolorem doloremque ducimus ex exercitationem harum iusto modi, molestiae mollitia,
+                    officia quisquam saepe sunt suscipit voluptate!</p>
+                <p> Aperiam architecto commodi consequatur cupiditate dolores eius error fuga, iste laboriosam laborum
+                    molestias officiis quaerat, repellat, repellendus repudiandae tenetur.</p>
             </div>
         </div>
     );

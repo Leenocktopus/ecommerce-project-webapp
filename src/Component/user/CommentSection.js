@@ -4,14 +4,14 @@ import Loading from "../util/Loading";
 import PageControl from "../util/PageControl";
 
 
-const Comments = ({url}) => {
+const Comments = ({url, key, setKey}) => {
     const [comments, setComments] = useState();
     const [author, setAuthor] = useState("");
     const [text, setText] = useState("");
     const [score, setScore] = useState(0);
-    const [currentLink, setCurrentLink] = useState(`${url}?page=0&size=10`);
+    const [currentLink, setCurrentLink] = useState(`${url}?page=0&size=10&sort=date,desc`);
     const [links, setLinks] = useState({prev: null, next: null});
-    const [key, setKey] = useState(Math.random());
+
     useEffect(() => {
         reload()
     }, [currentLink])
@@ -32,9 +32,11 @@ const Comments = ({url}) => {
     const addReview = () => {
         // Todo add validation
         axiosAPI.post(url,
-            {user: author,
+            {
+                user: author,
                 text,
-                score})
+                score
+            })
             .then(() => setScore(0))
             .then(() => setText(""))
             .then(() => setAuthor(""))
@@ -53,7 +55,7 @@ const Comments = ({url}) => {
 
                  <span key={key} className="star-rating star-5" onChange={(e) => setScore(e.target.value)}>
                      {[...Array(5).keys()].map(item =>
-                        <><input key={item} type="radio" name="rating" value={item + 1} /><i/></>
+                         <><input key={item} type="radio" name="rating" value={item + 1}/><i/></>
                      )}
                  </span>
                 <button id={"add-comment"} onClick={() => addReview()}>Add review</button>
@@ -61,22 +63,26 @@ const Comments = ({url}) => {
             </div>
             <div id={"comments-section"}>
                 <h4>Reviews</h4>
-                {comments ? (comments._embedded ? comments._embedded.productCommentModelList.map(item =>
-                    <div className={"comment-body"} key={item.id}>
-                        <div className={"author"}>{item.user}
-                            <div className={"date"}>{new Intl.DateTimeFormat("en").format(Date.parse(item.date))}</div>
+                {comments ? (comments._embedded ? <> {comments._embedded.productCommentModelList.map(item =>
 
-                            <div className="star-rating comment">
-                                <i style={{width: `${100 * item.score / 5}%`}}/>
+                        <div className={"comment-body"} key={item.id}>
+                            <div className={"author"}>{item.user}
+                                <div
+                                    className={"date"}>{new Intl.DateTimeFormat("en").format(Date.parse(item.date))}</div>
+
+                                <div className="star-rating comment">
+                                    <i style={{width: `${100 * item.score / 5}%`}}/>
+                                </div>
                             </div>
-                        </div>
-                        <div className={"text"}>{item.text}</div>
+                            <div className={"text"}>{item.text}</div>
 
-                    </div>
-                ) : <div>Comments are Empty</div>) : <Loading/>}
-                    <div id={"comments-page-control"}>
-                        <PageControl links={links} setCurrentLink={setCurrentLink}/>
-                    </div>
+                        </div> )}
+                        <div id={"comments-page-control"}>
+                            <PageControl links={links} setCurrentLink={setCurrentLink}/>
+                        </div>
+                    </>  : <div id={"no-reviews"}>No reviews</div>) : <Loading/>}
+
+
             </div>
         </div>
     )

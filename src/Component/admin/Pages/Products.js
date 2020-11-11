@@ -4,6 +4,7 @@ import ProductModal from "./modal/ProductModal";
 import ImageModal from "./modal/ImageModal";
 import Product from "./entity/Product";
 import PageControl from "../../util/PageControl";
+import * as qs from "qs";
 
 const Products = () => {
     const defaultProduct = {
@@ -22,7 +23,7 @@ const Products = () => {
         name: "",
         value: ""
     };
-    const defaultLink = "/products?page=0&size=25";
+    const defaultLink = "/products?page=0&size=20";
     const [products, setProducts] = useState(null);
     const [currentLink, setCurrentLink] = useState(defaultLink);
     const [links, setLinks] = useState({prev: null, next: null});
@@ -50,7 +51,13 @@ const Products = () => {
     }, [products])
 
     const reload = () => {
-        axiosAPI.get(currentLink)
+        axiosAPI.get(currentLink, {
+            params: {
+                f_cat: [],
+                f_man: []
+            }, paramsSerializer: params => {
+                return qs.stringify(params, {encode: false, arrayFormat: 'comma'})
+            }})
             .then(res => setProducts(res.data))
     }
     const openProductModal = () => {
@@ -94,8 +101,13 @@ const Products = () => {
         axiosAPI.delete(`/products/${id}`).then(() => reload())
 
     }
+    const keyListener = (e) => {
+        if (e.key === 'Enter'){
+            startSearch()
+        }
+    }
     return (
-        <div className={"admin-window-main-grid"}>
+        <div className={"admin-window-main-grid"} onKeyPress={(e) => keyListener(e)}>
             {(manufacturers && categories) &&
             <ProductModal isOpen={isProductModalOpen}
                           close={closeModal}

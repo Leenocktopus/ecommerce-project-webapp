@@ -48,8 +48,13 @@ const Orders = () => {
             .then(() => reload())
     }
 
+    const keyListener = (e) => {
+        if (e.key === 'Enter'){
+            startSearch()
+        }
+    }
     return (
-        <div className={"admin-window-main-grid"}>
+        <div className={"admin-window-main-grid"} onKeyPress={(e) => keyListener(e)}>
             {order && <OrderModal isOpen={isModalOpen}
                                   close={() => setModalOpen(false)}
                                   order={order}/>}

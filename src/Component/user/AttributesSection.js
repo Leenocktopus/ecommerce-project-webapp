@@ -11,7 +11,7 @@ const AttributesSection = ({url}) => {
     return (
         <div id={"product-attributes-container"}>
             <h4>Item specifics</h4>
-            {attributes ? (attributes._embedded ?
+            {attributes ? (attributes._embedded &&
                 <table id={"product-attributes-table"}>
                 <thead/>
                 <tbody >
@@ -21,8 +21,7 @@ const AttributesSection = ({url}) => {
                         <td>{item.value}</td>
                     </tr>
                 )}</tbody>
-            </table> :
-                <div>Attributes are empty</div>) : <Loading/>}
+            </table>) : <Loading/>}
 
         </div>
     )

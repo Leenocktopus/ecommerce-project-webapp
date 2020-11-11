@@ -1,7 +1,7 @@
 import React from "react";
-import not_found from "../../../styles/images/not_found.png";
+import not_found from "../../styles/images/not_found.png";
 import {Link} from "react-router-dom";
-import {addToCart} from "../../redux/actions/cartActions";
+import {addToCart} from "../redux/actions/cartActions";
 import {connect} from "react-redux";
 
 const Product = ({product, addToCart}) => {
@@ -22,7 +22,7 @@ const Product = ({product, addToCart}) => {
             <div className="star-rating comment">
                 <i style={startStyle}/>
             </div>
-            <div className={"product-price"}>{product.price}$</div>
+            <div className={"product-price"}>{(product.price).toLocaleString()}$</div>
 
             {product.amountInStock === 0 ? <span className={"out-of-stock"}>Out of stock</span> :
                 <button className={"product-card-buy"} onClick={() => addToCart({

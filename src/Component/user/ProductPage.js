@@ -9,10 +9,11 @@ import {connect} from "react-redux";
 
 const ProductPage = ({match, addToCart}) => {
     const [product, setProduct] = useState(null);
+    const [key, setKey] = useState(Math.random());
 
     useEffect(() => {
         axiosAPI.get(`products/${match.params.id}`).then(res => setProduct(res.data))
-    }, [])
+    }, [key])
 
 
     const startStyle = {
@@ -29,7 +30,8 @@ const ProductPage = ({match, addToCart}) => {
                             <div className="star-rating comment">
                                 <i style={startStyle}/>
                             </div>
-                            <div id={"product-price"}>{product.price}$</div>
+                            <div id={"man-cat-info"}>{product.manufacturer.name}  {product.category.name}</div>
+                            <div id={"product-price"}>{(product.price).toLocaleString()}$</div>
 
                             <button id={"product-card-buy"} disabled={product.amountInStock === 0}
                                     onClick={() => addToCart({
@@ -48,7 +50,7 @@ const ProductPage = ({match, addToCart}) => {
                     </div>
                     <div id={"additional-info-grid"}>
                         <AttributesSection url={product._links.attributes.href}/>
-                        <Comments url={product._links.comments.href}/>
+                        <Comments url={product._links.comments.href} key={key} setKey={setKey}/>
                     </div>
                 </>
                 : <Loading/>
