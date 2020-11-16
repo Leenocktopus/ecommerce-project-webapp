@@ -12,6 +12,10 @@ const Comments = ({url, key, setKey}) => {
     const [currentLink, setCurrentLink] = useState(`${url}?page=0&size=10&sort=date,desc`);
     const [links, setLinks] = useState({prev: null, next: null});
 
+    const [authorError, setAuthorError] = useState("");
+    const [scoreError, setScoreError] = useState("");
+
+
     useEffect(() => {
         reload()
     }, [currentLink])
@@ -30,34 +34,55 @@ const Comments = ({url, key, setKey}) => {
     }, [comments])
 
     const addReview = () => {
-        // Todo add validation
-        axiosAPI.post(url,
-            {
-                user: author,
-                text,
-                score
-            })
-            .then(() => setScore(0))
-            .then(() => setText(""))
-            .then(() => setAuthor(""))
-            .then(() => reload())
-            .then(() => setKey(Math.random()))
+        if (author === "") {
+            setAuthorError("Please, enter your name")
+        } else if (comments._embedded && comments._embedded.productCommentModelList.filter(comment => comment.user === author).length !== 0) {
+            setAuthorError("There is a review from this author already")
+        } else {
+            setAuthorError("")
+        }
+
+        if (score === 0) {
+            setScoreError("Please, rate the product");
+        } else {
+            setScoreError("")
+        }
+
+        if (!authorError && !scoreError) {
+            axiosAPI.post(url,
+                {
+                    user: author,
+                    text,
+                    score
+                })
+                .then(() => setScore(0))
+                .then(() => setText(""))
+                .then(() => setAuthor(""))
+                .then(() => reload())
+                .then(() => setKey(Math.random()))
+        }
+
     }
 
     return (
         <div id={"product-comments-container"}>
             <div id={"comment-form"}>
                 <label htmlFor="comment-author">Enter your name: </label>
-                <input id={"comment-author"} type="text" value={author} onChange={(e) => setAuthor(e.target.value)}/>
+                <div><input id={"comment-author"} type="text" value={author}
+                            onChange={(e) => setAuthor(e.target.value)}/><br/>
+                {authorError ? <span id={"author-error"}>{authorError}</span> : <span id={"author-error"}>&nbsp;</span>}</div>
                 <label htmlFor="comment-area">Enter your review: </label><br/>
                 <textarea id="comment-area" cols="60" rows="7" value={text} onChange={(e) => setText(e.target.value)}/>
+                <div>
+                    {scoreError ? <span id={"score-error"}>{scoreError}</span> : <span id={"score-error"}>&nbsp;</span>}
+                </div>
                 <span id={"comment-rate"}>Rate the product:
-
                  <span key={key} className="star-rating star-5" onChange={(e) => setScore(e.target.value)}>
                      {[...Array(5).keys()].map(item =>
                          <><input key={item} type="radio" name="rating" value={item + 1}/><i/></>
                      )}
                  </span>
+
                 <button id={"add-comment"} onClick={() => addReview()}>Add review</button>
                 </span>
             </div>
@@ -65,22 +90,22 @@ const Comments = ({url, key, setKey}) => {
                 <h4>Reviews</h4>
                 {comments ? (comments._embedded ? <> {comments._embedded.productCommentModelList.map(item =>
 
-                        <div className={"comment-body"} key={item.id}>
-                            <div className={"author"}>{item.user}
-                                <div
-                                    className={"date"}>{new Intl.DateTimeFormat("en").format(Date.parse(item.date))}</div>
+                    <div className={"comment-body"} key={item.id}>
+                        <div className={"author"}>{item.user}
+                            <div
+                                className={"date"}>{new Intl.DateTimeFormat("en").format(Date.parse(item.date))}</div>
 
-                                <div className="star-rating comment">
-                                    <i style={{width: `${100 * item.score / 5}%`}}/>
-                                </div>
+                            <div className="star-rating comment">
+                                <i style={{width: `${100 * item.score / 5}%`}}/>
                             </div>
-                            <div className={"text"}>{item.text}</div>
-
-                        </div> )}
-                        <div id={"comments-page-control"}>
-                            <PageControl links={links} setCurrentLink={setCurrentLink}/>
                         </div>
-                    </>  : <div id={"no-reviews"}>No reviews</div>) : <Loading/>}
+                        <div className={"text"}>{item.text}</div>
+
+                    </div>)}
+                    <div id={"comments-page-control"}>
+                        <PageControl links={links} setCurrentLink={setCurrentLink}/>
+                    </div>
+                </> : <div id={"no-reviews"}>No reviews</div>) : <Loading/>}
 
 
             </div>

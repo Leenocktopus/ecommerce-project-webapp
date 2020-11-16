@@ -46,8 +46,9 @@ const ProductModal = (props) => {
             descr: description
         };
         if (currentProduct.id) {
-            obj["id"] = currentProduct.id;
             url = url + "/" + currentProduct.id;
+            obj["totalScore"] = currentProduct.totalScore;
+            obj["popularity"] = currentProduct.popularity;
             axiosAPI.put(url, obj).then((res) => saveAttributes(res.data.id)).then(() => closeModal())
         } else {
             axiosAPI.post(url, obj).then((res) => saveAttributes(res.data.id)).then(() => closeModal())
