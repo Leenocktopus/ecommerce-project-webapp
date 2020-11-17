@@ -14,7 +14,7 @@ const Comments = ({url, key, setKey}) => {
 
     const [authorError, setAuthorError] = useState("");
     const [scoreError, setScoreError] = useState("");
-
+    const [commentError, setCommentError] = useState("");
 
     useEffect(() => {
         reload()
@@ -48,7 +48,12 @@ const Comments = ({url, key, setKey}) => {
             setScoreError("")
         }
 
-        if (!authorError && !scoreError) {
+        if(text.length > 500){
+            setCommentError("Review text is too long");
+        } else {
+            setCommentError("")
+        }
+        if (!authorError && !scoreError && !commentError) {
             axiosAPI.post(url,
                 {
                     user: author,
@@ -71,7 +76,7 @@ const Comments = ({url, key, setKey}) => {
                 <div><input id={"comment-author"} type="text" value={author}
                             onChange={(e) => setAuthor(e.target.value)}/><br/>
                 {authorError ? <span id={"author-error"}>{authorError}</span> : <span id={"author-error"}>&nbsp;</span>}</div>
-                <label htmlFor="comment-area">Enter your review: </label><br/>
+                <label htmlFor="comment-area">Enter your review: </label>{commentError ? <span id={"comment-error"}>{commentError}</span> : <span id={"comment-error"}>&nbsp;</span>}<br/>
                 <textarea id="comment-area" cols="60" rows="7" value={text} onChange={(e) => setText(e.target.value)}/>
                 <div>
                     {scoreError ? <span id={"score-error"}>{scoreError}</span> : <span id={"score-error"}>&nbsp;</span>}

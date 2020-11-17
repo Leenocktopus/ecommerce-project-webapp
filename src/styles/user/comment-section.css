@@ -82,7 +82,10 @@
     font-size: 14pt;
 }
 
-#score-error, #author-error{
+#score-error, #author-error, #comment-error{
     font-size: 9pt;
     color: crimson;
+}
+#comment-error{
+    margin: 5px 0 0 0;
 }

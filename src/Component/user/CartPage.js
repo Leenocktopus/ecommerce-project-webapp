@@ -20,20 +20,25 @@ const CartPage = ({cart, removeFromCart, setQuantity, deleteAll, history}) => {
 
         if (!customerName) {
             setNameError("Name should not be empty")
+        } else if (customerName.length > 20) {
+            setNameError("Name is too long");
         } else {
             setNameError("")
         }
-        if (!customerPhone ) {
+        if (!customerPhone) {
             setPhoneError("Phone should not be empty")
-        } else if(!rePhone.test(String(customerPhone).toLowerCase())){
+        } else if (!rePhone.test(String(customerPhone).toLowerCase())) {
             setPhoneError("Phone should have correct format")
         } else {
             setPhoneError("")
-        } if (!customerEmail ) {
+        }
+        if (!customerEmail) {
             setEmailError("Email should not be empty")
-        } else if(!reMail.test(String(customerEmail).toLowerCase())){
+        } else if (!reMail.test(String(customerEmail).toLowerCase())) {
             setEmailError("Email should have correct format")
-        }else {
+        } else if (customerEmail.length > 35) {
+            setEmailError("Email is too long");
+        } else {
             setEmailError("")
         }
 
